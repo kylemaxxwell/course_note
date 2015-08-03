@@ -90,7 +90,6 @@ $ exit
 ### Create a Local copy
 * Create a directory on your computer where you will store your copy of the repo: 
 	- (The tilde (`~`) symbol refers to your "home" directory)
-- 
 ```
 $ mkdir ~/test-repo
 ```
@@ -128,6 +127,7 @@ $ git remote add origin https://github.com/your-user-name-goes-here/test-repo.gi
 |-|**git fetch [remote-name]**| To fetch all changes from the "pb" remote repo and all branch.
 |-|**git branch -a**| Shows that we now have two "branches" stored on our computer: `master` and `remotes/origin/master`
 |-|**git branch -D [branch]**| Delete local branch.
+|-|**git push origin --delete [branch]**| Delete remote branch.
 |-|**git merge origin/master**| Incorporate the changes from our remote repo
 |-|**git checkout [branch]**| Switched to branch 'master' local branch automatically pull from  origin/master, and update local repository
 |-|**git checkout -b [branch] [remotename]/[branch]**| `git checkout -b sf origin/serverfix` local branch  sf will automatically pull from  origin/serverfix
