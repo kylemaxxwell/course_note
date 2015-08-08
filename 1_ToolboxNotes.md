@@ -21,24 +21,24 @@ str(rnorm)           # see structure of the object
 - ***flags*** are options we give to the ***command*** to trigger certain behaviors, preceded by a -
 - ***arguments*** can be what the ***command*** is going to modify, or other options for the ***command***
 
-|-|COMMAND|EXPLAIN
-|:-:|:---:|----
-|-|**pwd**| displays the path to the current working directory
-|-|**clear**| will clear out the commands in your current CLI window
-|-|**ls**| lists files and folders in the current directory
-|-|**ls -a**| lists hidden and unhidden files and folders
-|-|**ls -al**| lists details for hidden and unhidden files and folders
-|-|**cd**| stands for "change directory"
-|-|**cd ..**| allows you to change directory to one level above your current directory
-|-|**mkdir**| stands for "make directory"
-|-|**touch**| creates an empty file
-|-<td rowspan=2 align="center">**cp**</td>| stands for "copy"
-|-| `cp -r Documents More_docs` copies the contents of `Documents` into `More_docs`
-|-|**rm**| stands for "remove"
-|-|**rm -r**| delete entire directories and their contents
-|-|**mv**| stands for "move" and rename files
-|-|**echo**| will print whatever arguments you provide
-|-|**date**| will print today's date
+COMMAND|EXPLAIN
+:-:|----
+**pwd**| displays the path to the current working directory
+**clear**| will clear out the commands in your current CLI window
+**ls**| lists files and folders in the current directory
+**ls -a**| lists hidden and unhidden files and folders
+**ls -al**| lists details for hidden and unhidden files and folders
+**cd**| stands for "change directory"
+**cd ..**| allows you to change directory to one level above your current directory
+**mkdir**| stands for "make directory"
+**touch**| creates an empty file
+**cp**| stands for "copy"
+**cp**| `cp -r Documents More_docs` copies the contents of `Documents` into `More_docs`
+**rm**| stands for "remove"
+**rm -r**| delete entire directories and their contents
+**mv**| stands for "move" and rename files
+**echo**| will print whatever arguments you provide
+**date**| will print today's date
 
 
 
@@ -55,7 +55,7 @@ jeff$ echo Hello World!
 Hello World!
 ```
 
-## Git ##
+## Git
 ### Basic
 * Two methods of creating a GitHub repository:
   1. Start a repository from scratch
@@ -106,35 +106,36 @@ $ git init
 $ git remote add origin https://github.com/your-user-name-goes-here/test-repo.git
 ```
 
-###Basic Git Commands
-|-|GIT COMMAND|EXPLAIN
-|:-:|-----------|---
-|-|**git init**| Initializes a Git repo in our current directory
-|-|**git add .**| Adds all new files (note the period after `add`, which represents "all files")
-|-|**git add -u**| Updates tracking for files that changed names or were deleted
-|-|**git add -A** / **git add --all**| Does both of the previous No. 1 and 2
-|-|**git status**| Does exactly what is sounds like -- gives a "status report" for our local repo
-|-|**git status -s**|  `git status -s` or  `git status --short` you get a far more simplified output from the command
-|-|**git commit -m "your message"**| Commit changes
-|-|**git log**| Shows a history of all commits. Spacebar advances page by page. Typing the letter "Q" exits the log. P58
-|-|**git remote -v**| Shows that our GitHub repo is now set up as a "remote" repository for our local repo
-|-|**git remote add [shortname] [url]**| `git remote add pb https://github.com/paulboone/ticgit`
-|-|**git remote show [remote-name]**| lists the URL for the remote repository as well as the tracking branch information
-|-|**git remote rename pb paul**| rename  pb to  paul
-|-|**git remote rm paul**| remote name will turn back to "origin"
-|-|**git push -u [remote-name][branch-name]**| Tells Git to push our changes to the "master" (branch-name) branch of the "origin" (remote-name) remote. `-u origin master` only once added.
-|-|**git pull**| "pull" changes from a remote repository to our local repository, but it's  equals `git fetch` + `git merge`
-|-|**git fetch [remote-name]**| To fetch all changes from the "pb" remote repo and all branch.
-|-|**git branch -a**| Shows that we now have two "branches" stored on our computer: `master` and `remotes/origin/master`
-|-|**git branch -D [branch]**| Delete local branch.
-|-|**git push origin --delete [branch]**| Delete remote branch.
-|-|**git merge origin/master**| Incorporate the changes from our remote repo
-|-|**git checkout [branch]**| Switched to branch 'master' local branch automatically pull from  origin/master, and update local repository
-|-|**git checkout -b [branch] [remotename]/[branch]**| `git checkout -b sf origin/serverfix` local branch  sf will automatically pull from  origin/serverfix
+### Basic Git Commands
+GIT COMMAND|EXPLAIN
+:--|---
+**git init**| Initializes a Git repo in our current directory
+**git add .**| Adds all new files (note the period after `add`, which represents "all files")
+**git add -u**| Updates tracking for files that changed names or were deleted
+**git add -A** / **git add --all**| Does both of the previous No. 1 and 2
+**git status**| Does exactly what is sounds like -- gives a "status report" for our local repo
+**git status -s**|  `git status -s` or  `git status --short` you get a far more simplified output from the command
+**git commit -m "your message"**| Commit changes
+**git log**| Shows a history of all commits. Spacebar advances page by page. Typing the letter "Q" exits the log. P58
+**git remote -v**| Shows that our GitHub repo is now set up as a "remote" repository for our local repo
+**git remote add [shortname] [url]**| `git remote add pb https://github.com/paulboone/ticgit`
+**git remote show [remote-name]**| lists the URL for the remote repository as well as the tracking branch information
+**git remote rename pb paul**| rename  pb to  paul
+**git remote rm paul**| remote name will turn back to "origin"
+**git push -u [remote-name][branch-name]**| Tells Git to push our changes to the "master" (branch-name) branch of the "origin" (remote-name) remote. `-u origin master` only once added.
+**git pull**| "pull" changes from a remote repository to our local repository, but it's  equals `git fetch` + `git merge`
+**git fetch [remote-name]**| To fetch all changes from the "pb" remote repo and all branch.
+**git branch -a**| Shows that we now have two "branches" stored on our computer: `master` and `remotes/origin/master`
+**git branch -D [branch]**| Delete local branch.
+**git push origin --delete [branch]**| Delete remote branch.
+**git merge origin/master**| Incorporate the changes from our remote repo
+**git checkout [branch]**| Switched to branch 'master' local branch automatically pull from  origin/master, and update local repository
+**git checkout -b [branch] [remotename]/[branch]**| `git checkout -b sf origin/serverfix` local branch  sf will automatically pull from  origin/serverfix
 
+- Notes: know more about github from [here](https://guides.github.com/).
 
 ### VIM Commands
-####Opening a New File
+#### Opening a New File
 
 - Step 1	type	vim filename	(create a file named filename)
 - Step 2	type	i	( switch to insert mode)
@@ -142,7 +143,7 @@ $ git remote add origin https://github.com/your-user-name-goes-here/test-repo.gi
 - Step 4	hit	Esc key	(switch back to command mode)
 - Step 5	type	:wq	(write file and exit vim)
 
-####Editing the Existing File
+#### Editing the Existing File
 
 - Step 1	type	vim filename	(edit the existing file named filename)
 - Step 2	move around the file using h/j/k/l key or any appropriate command
@@ -175,7 +176,7 @@ search()
 ls("package:ggplot2")
 library(help=ggplot2)
 ```
-###Rtools
+### Rtools
 * A collection of tools necessary for building R packages in Windows
 * If you aren't sure, enter ```find.package("devtools")``` in the console
 * To install devtools, use ```install.packages("devtools")```
