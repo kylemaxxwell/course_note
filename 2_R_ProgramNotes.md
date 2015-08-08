@@ -20,6 +20,22 @@ Command|Explain
 `dir.create(file.path("d2","d3"),recursive=TRUE)`|Create the nested directory
 `unlink("d2",recursive=TRUE)`|Delete the "d2" directory
 
+## Looking at Data
+NO|FLOW
+:-:|---
+1|`ls()`
+2|`class(objects)`
+3|`dim(objects)`
+4|`nrow(objects)`
+5|`ncol(objects)`
+6|`object.size(objects)`
+7|`names(objects)`
+8|`head(objects)`
+9|`head(objects,10)`
+10|`tail(objects,15)`
+11|`summary(objects)`
+12|`table(objects$sex)`
+13|`str(objects)`
 
 ## Objects
 
@@ -249,13 +265,78 @@ See ControlStructures.pdf
 
 NO|NAME|DATE|**TIME**: `POSIXct`|**TIME**: `POSIXlt`|**TIME**: `strptime()`
 :-:|:-:|---|---|---|---
-1|**Code**|`x <- as.Date("1970-01-01")`<br>`unclass(x) ## [1] 0`<br>`unclass(as.Date("1970-01-02"))`<br>`## [1] 1`|`x <- Sys.time() ## ‘POSIXct’ format`<br>`x  ## [1] "2013-01-24 22:04:14 EST"`<br>`unclass(x) ## [1] 1359083054`<br>`x$sec ## Error: ...atomic vectors`<br>`p <- as.POSIXlt(x)`<br>`p$sec ## [1] 14.37`|`x <- Sys.time()`<br>`x ## [1] "2013-01-24 22:04:14 EST"`<br>`p <- as.POSIXlt(x)`<br>`names(unclass(p))## [1] "sec"...`<br>`p$sec ## [1] 14.34`|`x <- c("1jan1960", "2jan1960",`<br>` "31mar1960", "30jul1960")`<br>`z <- strptime(x, "%d%b%Y")`<br>`## Sys.setlocale("LC_TIME", lct)`<br>`strptime("20/2/06 11:16:16.683",`<br>` "%d/%m/%y %H:%M:%OS")`
-2|**Explain**|representing calendar dates|a very large integer under the hood<br>store in something like *data frame*|a list underneath<br>store a bunch of other useful information like:<br>- *day of the week*<br>- *day of the year, month*<br>- *day of the month*|directly convert character vectors<br>(of a variety of formats) to POSIXlt format.
-3|**Format**<td colspan=4>`datestring <- c("January 10, 2012 10:40", "December 9, 2011 9:10")`<br>`x <- strptime(datestring, "%B %d, %Y %H:%M")`<br>`x ## [1] "2012-01-10 10:40:00 EST" "2011-12-09 09:10:00 EST"`<br>`class(x) ## [1] "POSIXlt" "POSIXt"`<br>`?strptime`</td>
-4|**Operate**<td colspan=4>`x <- as.Date("2012-01-01") # Date class`<br>`x <- as.POSIXlt(x) # Change to POSIXlt for x-y`<br>`y <- strptime("9 Jan 2011 11:34:21", "%d %b %Y %H:%M:%S")`<br>`x-y ## Time difference of 356.3 days`<br><br>`x <- as.Date("2012-03-01") y <- as.Date("2012-02-28")`<br>`x-y ## Time difference of 2 days`<br>`x <- as.POSIXct("2012-10-25 01:00:00")`<br>`y <- as.POSIXct("2012-10-25 06:00:00", tz = "GMT")`<br>`y-x ## Time difference of 1 hours`</td>
+1|**Code**|`s<-Sys.Date()`<br>`unclass(s) #since 1970-01-01`<br>`x <- as.Date("1970-01-01")`<br>`unclass(x) ## [1] 0`<br>`unclass(as.Date("1970-01-02"))`<br>`## [1] 1`|`x <- Sys.time() ## ‘POSIXct’ format`<br>`x  ## [1] "2013-01-24 22:04:14 EST"`<br>`unclass(x) ## [1] 1359083054`<br>`x$sec ## Error: ...atomic vectors`<br>`p <- as.POSIXlt(x)`<br>`p$sec ## [1] 14.37`|`x <- Sys.time()`<br>`x ## [1] "2013-01-24 22:04:14 EST"`<br>`p <- as.POSIXlt(x)`<br>`names(unclass(p))## [1] "sec"...`<br>`p$sec ## [1] 14.34`|`x <- c("1jan1960", "2jan1960",`<br>` "31mar1960", "30jul1960")`<br>`z <- strptime(x, "%d%b%Y")`<br>`## Sys.setlocale("LC_TIME", lct)`<br>`strptime("20/2/06 11:16:16.683",`<br>` "%d/%m/%y %H:%M:%OS")`
+2|**Explain**|representing calendar dates|`Sys.time()` returns an object of class POSIXct<BR>a very large integer under the hood<br>store in something like *data frame*|a list underneath<br>store a bunch of other useful information like:<br>- *day of the week*<br>- *day of the year, month*<br>- *day of the month*|Directly convert character vectors<br>(of a variety of formats) to POSIXlt format.<BR>Similar to `as.POSIXlt()`, except that the input doesn't have to be in a particular format (YYYY-MM-DD).
+
+
+- **Format**
+```r
+datestring <- c("January 10, 2012 10:40", "December 9, 2011 9:10")
+x <- strptime(datestring, "%B %d, %Y %H:%M")
+x ## [1] "2012-01-10 10:40:00 EST" "2011-12-09 09:10:00 EST"
+class(x) ## [1] "POSIXlt" "POSIXt"
+?strptime
+```
+- **Operate**  
+
+	```r
+	x <- as.Date("2012-01-01") # Date class
+	x <- as.POSIXlt(x) # Change to POSIXlt for x-y
+	y <- strptime("9 Jan 2011 11:34:21", "%d %b %Y %H:%M:%S")
+	x-y ## Time difference of 356.3 days
+	
+	x <- as.Date("2012-03-01") 
+	y <- as.Date("2012-02-28")
+	x-y ## Time difference of 2 days
+	x <- as.POSIXct("2012-10-25 01:00:00")
+	y <- as.POSIXct("2012-10-25 06:00:00", tz = "GMT")
+	y-x ## Time difference of 1 hours
+	```
+Notes: Use difftime(Sys.time(), t1, units = 'days') to find the amount of time in DAYS that has passed since created t1.
+```r
+> difftime(Sys.time(),t1,units="days")
+Time difference of 0.03565759 days
+```
 
 ## Functions
 see functions.pdf
+
+- Pass functions as arguments to other functions just like pass data to functions
+
+	```r
+	evaluate <- function(func, dat){
+	    func(dat)
+	}
+	
+	# 1. evaluate(sum, c(2, 4, 6)) evaluate to 12
+	# 2. evaluate(median, c(7, 40, 9)) evaluate to 9
+	# 3. evaluate(floor, 11.1) evaluate to 11
+	# 4. evaluate(function(x){x+1},6) evaluate to 7
+	```
+- "Unpack" arguments from an ellipses when use the ellipses as an argument in a function. 
+
+	```r
+	mad_libs <- function(...){
+	  args<-list(...)
+	  place<-args[1]
+	  adjective<-args[2]
+	  noun<-args[3]
+	  paste("News from", place, "today where", adjective, "students go to the", noun, ".")
+	}
+	
+	> mad_libs("Kingsland","senior","streets")
+	[1] "News from Kingsland today where senior students go to the streets."
+	```
+- Syntax for creating new binary operators
+
+	```r
+	"%p%" <- function(left,right){
+	  paste(left,right)
+	}
+	
+	> 'I' %p% "love" %p% 'R!'
+	[1] "I love R!"
+	```
 
 ## Scoping Rules
 see Scoping.pdf
