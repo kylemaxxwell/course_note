@@ -63,7 +63,7 @@ logical|&<br>&#124;|<P align=left>`x & y #bitwise AND, 0101 & 0011 = 0001`<br>`x
 "collects"<br>"combines"<br>"joins"|`c()`|`> x <- c(0.5, 0.6)       ## numeric`<br>`> x <- c(T, F) ## logical`<br>`> x <- c("a", "b", "c") ## character`<br>`> x <- 9:29 ## integer`<br>`> x <- c(1+0i, 2+4i) ## complex`|create vectors of objects
 
 
-##Mixing Objects & Explicit Coercion
+## Mixing Objects & Explicit Coercion
 |EXPLICIT COERCION|EXPLICIT COERCION
 ---|---|---
 <P align=center>MIXING OBJECTS</P>|<P align=center>as.* functions</P>|<P align=center>Nonsensical coercion results in  NA s</P>
@@ -101,7 +101,7 @@ Levels: yes no
 ```
 
 ## Missing Values & Removing NA
-###Missing values###  
+### Missing values ###  
 Missing values are denoted by `NA` or `NaN` for undefined mathematical operations.  
 - `is.na()` is a logical test for which variables are missing.
 - `is.nan()` is used to test for `NaN`
@@ -120,7 +120,7 @@ Missing values are denoted by `NA` or `NaN` for undefined mathematical operation
 > is.nan(x)
 [1] FALSE FALSE  TRUE FALSE FALSE
 ```
-###Removing NA Values
+### Removing NA Values
 A common task is to remove missing values (`NA`s).
 ```r
 > x <- c(1, 2, NA, 4, NA, 5)
@@ -151,8 +151,8 @@ TYPES|INSTRUCTIONS<td colspan=2>**FUNCTIONS**</td>|EXAMPLES
 **table**|Elements: **different classes**<br>Basic tabulation function<br>for *character* and *factor* vectors|`> x =c("b","g","g","b","g")`<br>`> table(x)`<br>`> y = c(1,2,1,2,1)`<br>`> table(x,y)`
 **data frame**|Elements: **different classes**<br>Special attribute: `row.names`<br>Created by: `data.frame()`<br>`read.table()` `read.csv()`<br> Convert to matrix: `data.matrix()`|`> x<-data.frame(foo=1:2,bar=c(T,F))`<br>`> nrow(x)`<br>`> ncol(x)`
 
-##Subseting
-###Subseting vector and list
+## Subseting
+### Subseting vector and list
 - `[[` operator can be used with _computed_ indices.
  - can take an integer sequence
 - `$` can only be used with literal names.
@@ -192,7 +192,7 @@ $bar
 > x[["a"]]     # NULL
 > x[["a", exact = FALSE]]     # [1] 1 2 3 4 5
 ```
-###Subseting matrix and table and data frame
+### Subseting matrix and table and data frame
 Matrices can be subsetted in the usual way with (_i,j_) type indices.
 ```r
 > x <- matrix(1:6, 2, 3)
@@ -231,30 +231,29 @@ R Objects|dput-ting|Dumping|
 
 ### Interfaces to the Outside World
 Read Files|FILE|GZFILE / BZFILE|URL
----|---|---
+---|---|---|---
 **Code**|`con <- file("foo.txt", "r")`<br>`data <- read.csv(con)`<br>`close(con)`<br>is the same as<br>`data <- read.csv("foo.txt")`|`> con <- gzfile("words.gz") `<br>`> x <- readLines(con, 10)`|`con <- url("http://www.jhsph.edu", "r")`<br>`x <- readLines(con)`<br>`> head(x)`
 **Explain**|1. `description`: the name of the file<br>2. `open`: a code indicating<br>-- “r” read only<br>-- “w” writing (initializing a new file)<br>-- “a” appending<br>-- “rb”, “wb”, “ab” reading, writing, or appending in binary mode (Windows)|`writeLines` takes a character vector and writes each element one line at a time to a text file.|`readLines` can be useful for reading in lines of webpages
 
-##Control Structures
+## Control Structures  
 See ControlStructures.pdf
 
-##Dates & Time
+## Dates & Time
 
--|-|DATE<td colspan=2 align=center>**TIME**</td>
----|---
-1|**Class**|`Date` class|`POSIXct`|`POSIXlt`
-2|**Code**|`x <- as.Date("1970-01-01")`<br>`unclass(x) ## [1] 0`<br>`unclass(as.Date("1970-01-02")) ## [1] 1`|`x <- Sys.time() ## ‘POSIXct’ format`<br>`x  ## [1] "2013-01-24 22:04:14 EST"`<br>`unclass(x) ## [1] 1359083054`<br>`x$sec ## Error: ...atomic vectors`<br>`p <- as.POSIXlt(x)`<br>`p$sec ## [1] 14.37`|`x <- Sys.time()`<br>`x ## [1] "2013-01-24 22:04:14 EST"`<br>`p <- as.POSIXlt(x)`<br>`names(unclass(p))## [1] "sec"...`<br>`p$sec ## [1] 14.34`
-3|**Explain**|-|a very large integer under the hood<br>store in something like *data frame*|a list underneath<br>store a bunch of other useful information like:<br>- *day of the week*<br>- *day of the year, month*<br>- *day of the month*
-4|**Format**<td colspan=3>`datestring <- c("January 10, 2012 10:40", "December 9, 2011 9:10")`<br>`x <- strptime(datestring, "%B %d, %Y %H:%M")`<br>`x ## [1] "2012-01-10 10:40:00 EST" "2011-12-09 09:10:00 EST"`<br>`class(x) ## [1] "POSIXlt" "POSIXt"`<br>`?strptime`</td>
-5|**Operate**<td colspan=3>`x <- as.Date("2012-01-01") # Date class`<br>`x <- as.POSIXlt(x) # Change to POSIXlt for x-y`<br>`y <- strptime("9 Jan 2011 11:34:21", "%d %b %Y %H:%M:%S")`<br>`x-y ## Time difference of 356.3 days`<br><br>`x <- as.Date("2012-03-01") y <- as.Date("2012-02-28")`<br>`x-y ## Time difference of 2 days`<br>`x <- as.POSIXct("2012-10-25 01:00:00")`<br>`y <- as.POSIXct("2012-10-25 06:00:00", tz = "GMT")`<br>`y-x ## Time difference of 1 hours`</td>
+NO|NAME|DATE|**TIME**: `POSIXct`|**TIME**: `POSIXlt`|**TIME**: `strptime()`
+---|---|---|---|---|---
+1|**Code**|`x <- as.Date("1970-01-01")`<br>`unclass(x) ## [1] 0`<br>`unclass(as.Date("1970-01-02"))`<br>`## [1] 1`|`x <- Sys.time() ## ‘POSIXct’ format`<br>`x  ## [1] "2013-01-24 22:04:14 EST"`<br>`unclass(x) ## [1] 1359083054`<br>`x$sec ## Error: ...atomic vectors`<br>`p <- as.POSIXlt(x)`<br>`p$sec ## [1] 14.37`|`x <- Sys.time()`<br>`x ## [1] "2013-01-24 22:04:14 EST"`<br>`p <- as.POSIXlt(x)`<br>`names(unclass(p))## [1] "sec"...`<br>`p$sec ## [1] 14.34`|`x <- c("1jan1960", "2jan1960",`<br>` "31mar1960", "30jul1960")`<br>`z <- strptime(x, "%d%b%Y")`<br>`## Sys.setlocale("LC_TIME", lct)`<br>`strptime("20/2/06 11:16:16.683",`<br>` "%d/%m/%y %H:%M:%OS")`
+2|**Explain**|representing calendar dates|a very large integer under the hood<br>store in something like *data frame*|a list underneath<br>store a bunch of other useful information like:<br>- *day of the week*<br>- *day of the year, month*<br>- *day of the month*|directly convert character vectors<br>(of a variety of formats) to POSIXlt format.
+3|**Format**<td colspan=4>`datestring <- c("January 10, 2012 10:40", "December 9, 2011 9:10")`<br>`x <- strptime(datestring, "%B %d, %Y %H:%M")`<br>`x ## [1] "2012-01-10 10:40:00 EST" "2011-12-09 09:10:00 EST"`<br>`class(x) ## [1] "POSIXlt" "POSIXt"`<br>`?strptime`</td>
+4|**Operate**<td colspan=4>`x <- as.Date("2012-01-01") # Date class`<br>`x <- as.POSIXlt(x) # Change to POSIXlt for x-y`<br>`y <- strptime("9 Jan 2011 11:34:21", "%d %b %Y %H:%M:%S")`<br>`x-y ## Time difference of 356.3 days`<br><br>`x <- as.Date("2012-03-01") y <- as.Date("2012-02-28")`<br>`x-y ## Time difference of 2 days`<br>`x <- as.POSIXct("2012-10-25 01:00:00")`<br>`y <- as.POSIXct("2012-10-25 06:00:00", tz = "GMT")`<br>`y-x ## Time difference of 1 hours`</td>
 
-##Functions
+## Functions
 see functions.pdf
 
-##Scoping Rules
+## Scoping Rules
 see Scoping.pdf
 
-##Loop Functions
+## Loop Functions
 |-|NAME|HOW|CODE|EXPLAIN
 |-|-|-|-|-
 |-|**lapply**|Loop over a list<br>Evaluate a function on each element<br>Always returns a list|`x <- list(a = 1:5, b = rnorm(10))`<br>`lapply(x, mean)`<br>`> x<-list(a=matrix(1:4,2,2),b=matrix(1:6,3,2))`<br>`> lapply(x, function(elt) elt[,1])`|-|
@@ -264,7 +263,7 @@ see Scoping.pdf
 |-|**tapply**|Apply a function<br>over subsets of a vector|`> x <- c(rnorm(10), runif(10), rnorm(10, 1))`<br>`> f <- gl(3, 10)`<br>`> tapply(x, f, mean)`<br><br>`#without simplification`<br>`> tapply(x, f, mean, simplify = FALSE)`<br><br>`#Find group ranges.`<br>`> tapply(x, f, range)`<br><br>#Group by `flags$red`<br>`> tapply(flags$population,flags$red,summary)`|Split data into groups based on the value of some variable, then apply a function to each group|
 |-|**mapply**|Multivariate version of `lapply`|`list(rep(1,4),rep(2,3),rep(3,2),rep(4,1))`<br>same as:<br>`> mapply(rep, 1:4, 4:1)`<br><br>`noise <- function(n, mean, sd) {`<br>`rnorm(n, mean, sd)`<br>`}`<br><br>`> mapply(noise, 1:5, 1:5, 2)`<br>same as:<br>`> list(noise(1, 1, 2), noise(2, 2, 2),`<br>`noise(3, 3, 2), noise(4, 4, 2),`<br>`noise(5, 5, 2))`|-|
 
-###split
+### split
 
 `split` takes a vector or other objects and splits it into groups determined by a factor or list of factors.
 
