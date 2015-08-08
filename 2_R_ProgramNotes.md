@@ -270,13 +270,14 @@ NO|NAME|DATE|**TIME**: `POSIXct`|**TIME**: `POSIXlt`|**TIME**: `strptime()`
 
 
 - **Format**
-```r
-datestring <- c("January 10, 2012 10:40", "December 9, 2011 9:10")
-x <- strptime(datestring, "%B %d, %Y %H:%M")
-x ## [1] "2012-01-10 10:40:00 EST" "2011-12-09 09:10:00 EST"
-class(x) ## [1] "POSIXlt" "POSIXt"
-?strptime
-```
+
+	```r
+	datestring <- c("January 10, 2012 10:40", "December 9, 2011 9:10")
+	x <- strptime(datestring, "%B %d, %Y %H:%M")
+	x ## [1] "2012-01-10 10:40:00 EST" "2011-12-09 09:10:00 EST"
+	class(x) ## [1] "POSIXlt" "POSIXt"
+	?strptime
+	```
 - **Operate**  
 
 	```r
@@ -292,6 +293,7 @@ class(x) ## [1] "POSIXlt" "POSIXt"
 	y <- as.POSIXct("2012-10-25 06:00:00", tz = "GMT")
 	y-x ## Time difference of 1 hours
 	```
+
 Notes: Use difftime(Sys.time(), t1, units = 'days') to find the amount of time in DAYS that has passed since created t1.
 ```r
 > difftime(Sys.time(),t1,units="days")
@@ -571,14 +573,19 @@ The `sample` function draws randomly from a specified set of (scalar) objects al
 > sample(1:10)       #[1]  2  3  4  1  9  5 10  8  6  7
 > sample(1:10, replace = TRUE)       ## Sample w/replacement [1] 2 9 7 8 2 8 5 9 7 8
 ```
+$$
+log μ = \beta_0 + \beta_1x
+$$
+`\( \del \cdot \vec{B} = 0 \)`
 
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     tex2jax: {
       inlineMath: [['$','$'], ['\\(','\\)']],
-      processEscapes: true
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
     }
   });
 </script>
-<script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
