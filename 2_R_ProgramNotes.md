@@ -32,6 +32,14 @@ Command|Explain
 |logical|variables composed of TRUE or FALSE|
 |factor|categorical / qualitative variables|
 
+Notes: `identical(vect,vect2)` test two objects for being exactly equal, return TURE or FALSE.
+
+### Mixing Objects & Explicit Coercion
+|EXPLICIT COERCION|EXPLICIT COERCION
+---|---|---
+<P align=center>MIXING OBJECTS</P>|<P align=center>as.* functions</P>|<P align=center>Nonsensical coercion results in  NA s</P>
+`> y <- c(1.7, "a")   ## character`<br>`> y <- c(TRUE, 2)    ## numeric`<br>`> y <- c("a", TRUE)  ## character<br>`|`> x <- 0:6`<br>`> class(x)`<br>`[1] "integer"`<br>`> as.numeric(x)`<br>`[1] 0 1 2 3 4 5 6`<br>`> as.logical(x)`<br>`[1] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE`<br>`> as.character(x)`<br>`[1] "0" "1" "2" "3" "4" "5" "6"`|`> x <- c("a", "b", "c")`<br>`> as.numeric(x)`<br>`[1] NA NA NA`<br>`Warning message:`<br>`NAs introduced by coercion`<br>`> as.logical(x)`<br>`[1] NA NA NA`<br>`> as.complex(x)`<br>`[1] 0+0i 1+0i 2+0i 3+0i 4+0i 5+0i 6+0i`
+
 ## Numbers
 -   Numbers == numeric objects (i.e. double precision real numbers)
 -   an integer, specify the `L` suffix, Ex: `1` -> numeric object; `1L` -> integer.
@@ -43,7 +51,7 @@ Command|Explain
 **Object attributes**
 
 - names, dimnames
-- dimensions(e.g. matrices, arrays)
+- dimensions(e.g. matrices, arrays, factors)
 - class
 - length
 - others user-defined attributes/metadata
@@ -60,14 +68,11 @@ Operators|`+ - * /`|`> x + 2`<br>`> x + c(1,2,3,4)`|`x * y` # element-wise multi
 Operators|`%*%`|`> x <- matrix(1:4, 2, 2) `<br>`> y <- matrix(rep(10, 4), 2, 2)`<br>`x %*% y`|true matrix multiple
 logical|&&<br>&#124;&#124;|`x && y #true if both x and y are true`<br>`x` &#124;&#124; `y #true if either x or y are true`|&& lazy.<br>It will only evaluate y if x is true
 logical|&<br>&#124;|<P align=left>`x & y #bitwise AND, 0101 & 0011 = 0001`<br>`x` &#124; `y #bitwise OR,  0101` &#124; `0011 = 0111`</p>|& not lazy.<br>y will always be evaluated.
+logical|`xor()`|`> xor(5==6,!FALSE) ##[1] TRUE`|TRUE and FALSE, return TRUE
+logical|`which()`|`> which(ints>7)`|Argument: a logical vector<br> Return: the indices of the vector that are TRUE
+logical|`any()`|`> any(ints<0) #[1] FALSE`|if any of the elements of ints are less than 0
+logical|`all()`|`> all(ints>0) #[1] TRUE`|if all of the elements of ints are greater than 0
 "collects"<br>"combines"<br>"joins"|`c()`|`> x <- c(0.5, 0.6)       ## numeric`<br>`> x <- c(T, F) ## logical`<br>`> x <- c("a", "b", "c") ## character`<br>`> x <- 9:29 ## integer`<br>`> x <- c(1+0i, 2+4i) ## complex`|create vectors of objects
-
-
-## Mixing Objects & Explicit Coercion
-|EXPLICIT COERCION|EXPLICIT COERCION
----|---|---
-<P align=center>MIXING OBJECTS</P>|<P align=center>as.* functions</P>|<P align=center>Nonsensical coercion results in  NA s</P>
-`> y <- c(1.7, "a")   ## character`<br>`> y <- c(TRUE, 2)    ## numeric`<br>`> y <- c("a", TRUE)  ## character<br>`|`> x <- 0:6`<br>`> class(x)`<br>`[1] "integer"`<br>`> as.numeric(x)`<br>`[1] 0 1 2 3 4 5 6`<br>`> as.logical(x)`<br>`[1] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE`<br>`> as.character(x)`<br>`[1] "0" "1" "2" "3" "4" "5" "6"`|`> x <- c("a", "b", "c")`<br>`> as.numeric(x)`<br>`[1] NA NA NA`<br>`Warning message:`<br>`NAs introduced by coercion`<br>`> as.logical(x)`<br>`[1] NA NA NA`<br>`> as.complex(x)`<br>`[1] 0+0i 1+0i 2+0i 3+0i 4+0i 5+0i 6+0i`
 
 ## Factors
 
@@ -100,8 +105,18 @@ The order of the levels can be set using the `levels` argument to `factor()`. Th
 Levels: yes no
 ```
 
+## Vector *vs* Lists *vs* Matrices *vs* Table *vs* Data Frames
+
+TYPES|INSTRUCTIONS<td colspan=2>**FUNCTIONS**</td>|EXAMPLES
+:-:|:-:|---
+**vector**|Elements: **same class**<br>Create empty vectors : `vector()`<td rowspan=5>`length()`<br>`head()`<br>`tail()`<br>`table()`<br>`subset()`<br>`[ ]`<br>`unique()`<br>`sum()`<br>`mean()`<br>`median()`<br>`min()`<br>`max()`<br>`which()`</td><td rowspan=2>`paste()`</td>|`> x<-vector("numeric",length=5)`
+**list**|Elements: **different classes**|`> x<-list(1,"a",TRUE,1+4i)`
+**matrix**|Elements: **same class**<br>Dimension attribute - `dim(m)`:<br>length 2 integer vector<td rowspan=3>`nrow()`<br>`ncol()`<br>`dim()`<br>`colnames()`<br>`rownames()`<br>`cbind()`<br>`rbind()`<br>`attributes()`<br><br>matrix:<br>`dimnames()`</td>|`> m <- matrix(nrow=2,ncol=3) `<br>`> dim(m)`<br>`> attributes(m)`<br>`> matrix(1:6, nrow = 3)`
+**table**|Elements: **different classes**<br>Basic tabulation function<br>for *character* and *factor* vectors|`> x =c("b","g","g","b","g")`<br>`> table(x)`<br>`> y = c(1,2,1,2,1)`<br>`> table(x,y)`
+**data frame**|Elements: **different classes**<br>Special attribute: `row.names`<br>Created by: `data.frame()`<br>`read.table()` `read.csv()`<br> Convert to matrix: `data.matrix()`|`> x<-data.frame(foo=1:2,bar=c(T,F))`<br>`> nrow(x)`<br>`> ncol(x)`
+
 ## Missing Values & Removing NA
-### Missing values ###  
+### Missing values  
 Missing values are denoted by `NA` or `NaN` for undefined mathematical operations.  
 - `is.na()` is a logical test for which variables are missing.
 - `is.nan()` is used to test for `NaN`
@@ -112,6 +127,8 @@ Missing values are denoted by `NA` or `NaN` for undefined mathematical operation
 > x <- c(1, 2, NA, 10, 3)
 > is.na(x)
 [1] FALSE FALSE  TRUE FALSE FALSE
+> sum(is.na(x))
+[1] 1
 > is.nan(x)
 [1] FALSE FALSE FALSE FALSE FALSE
 > x <- c(1, 2, NaN, NA, 4)
@@ -140,16 +157,6 @@ A common task is to remove missing values (`NA`s).
 > y[good]
 [1] "a" "b" "d" "f"
 ```
-
-## Vector *vs* Lists *vs* Matrices *vs* Table *vs* Data Frames
-
-TYPES|INSTRUCTIONS<td colspan=2>**FUNCTIONS**</td>|EXAMPLES
-:-:|:-:|---
-**vector**|Elements: **same class**<br>Create empty vectors : `vector()`<td rowspan=5>`length()`<br>`head()`<br>`tail()`<br>`table()`<br>`subset()`<br>`[ ]`<br>`unique()`<br>`sum()`<br>`mean()`<br>`median()`<br>`min()`<br>`max()`<br>`which()`</td><td rowspan=2>-</td>|`> x<-vector("numeric",length=5)`
-**list**|Elements: **different classes**|`> x<-list(1,"a",TRUE,1+4i)`
-**matrix**|Elements: **same class**<br>Dimension attribute - `dim(m)`:<br>length 2 integer vector<td rowspan=3>`nrow()`<br>`ncol()`<br>`dim()`<br>`colnames()`<br>`rownames()`<br>`cbind()`<br>`rbind()`<br><br>matrix:<br>`dimnames()`</td>|`> m <- matrix(nrow=2,ncol=3) `<br>`> dim(m)`<br>`> attributes(m)`<br>`> matrix(1:6, nrow = 3)`
-**table**|Elements: **different classes**<br>Basic tabulation function<br>for *character* and *factor* vectors|`> x =c("b","g","g","b","g")`<br>`> table(x)`<br>`> y = c(1,2,1,2,1)`<br>`> table(x,y)`
-**data frame**|Elements: **different classes**<br>Special attribute: `row.names`<br>Created by: `data.frame()`<br>`read.table()` `read.csv()`<br> Convert to matrix: `data.matrix()`|`> x<-data.frame(foo=1:2,bar=c(T,F))`<br>`> nrow(x)`<br>`> ncol(x)`
 
 ## Subseting
 ### Subseting vector and list
