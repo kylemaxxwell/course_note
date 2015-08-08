@@ -2,19 +2,35 @@
 Version 1.0
 
 ----------
-Notes: no swirl
+## Workspace and Files
+Command|Explain
+---|---
+`getwd()`|Current working directory
+`list.files()`<br>`dir()`|List all the files in working directory
+`args(list.files)`|Determine the arguments
+`dir.create()`|Create a directory in the current working directory
+`setwd("testdir")`|Set working directory to "testdir"
+`file.create("t.R")`|Create a file "t.R" in working directory 
+`file.exists("t.R")`|Check to see if "t.R" exists in the working directory
+`file.info("t.R")`|Access information about the file "t.R" 
+`file.rename("t.R","t2.R")`|Change the name of the file "t.R" to "p.R"
+`file.copy("t2.R","t3.R")`|Make a copy of "t2.R" called "t3.R"
+`file.path("t3.R")`|Provide the relative path to the file "t3.R"
+`file.path("f1","f2")`|Construct file and directory paths
+`dir.create(file.path("d2","d3"),recursive=TRUE)`|Create the nested directory
+`unlink("d2",recursive=TRUE)`|Delete the "d2" directory
 
 
 ## Objects
 
-|<td colspan=5>R has five basic or “atomic” classes of objects:</td>|
-|-|-|-|-|-|
-|>|character<td colspan=4>strings or individual characters, quoted</td>|
-|>|numeric<td colspan=4>any real number(s)</td>|
-|>|integer<td colspan=4>any integer(s)/whole numbers</td>|
-|>|factor<td colspan=4>categorical / qualitative variables</td>|
-|>|complex<td colspan=4></td>|
-|>|logical<td colspan=4>variables composed of TRUE or FALSE</td>|
+|-|R has five basic or “atomic” classes of objects:|
+|---|---|
+|character|strings or individual characters, quoted|
+|numeric|any real number(s)|
+|integer|any integer(s)/whole numbers|
+|complex|-
+|logical|variables composed of TRUE or FALSE|
+|factor|categorical / qualitative variables|
 
 ## Numbers
 -   Numbers == numeric objects (i.e. double precision real numbers)
@@ -23,30 +39,35 @@ Notes: no swirl
 -   `NaN` -> an undefined value (“not a number”); e.g. 0 / 0; `NaN` can also be thought of as a missing value
 
 ## Attributes
-|-<td colspan=5 align=center>**Function: `attributes()`**</td>|
-|-|:-:|:-:|:-:|:-:|:-:|
-|**Object<br>attributes**|names, dimnames|dimensions|class|length|others
-|-|-|e.g. matrices, arrays|-|-|user-defined attributes/metadata
+**Function: `attributes()`**  
+**Object attributes**
+
+- names, dimnames
+- dimensions(e.g. matrices, arrays)
+- class
+- length
+- others user-defined attributes/metadata
 
 ## Entering Input & Evaluation & Printing & Creating Vectors
-|-|SYMBOL NAME|SYMBOL|USED|NOTES
-|:-:|:-:|:-:|-|-|
-|-<td rowspan=2 align=center>assignment</td>|`<-`<td rowspan=2>`> x <- 1 ## nothing printed`<br>`> print(x) ## explicit printing`<br>`[1] 1<br>> x ## auto-printing occurs`</td><td rowspan=2>`[1]` indicates `x` is a vector <br> `5` is the first element</td>
-|-|`=`
-|-|comment|`#`|`> x <-  ## Incomplete expression`|-|
-|-|-|`:`|`> x <- 1:5`|create integer sequences<br>`1:4 + 1` is “2,3,4,5”|
-|-<td rowspan=2 align=center>Operators</td>|`+ - * /`|<P align=left>`> x + 2`<br>`> x + c(1,2,3,4)`</P>|`x * y` # element-wise multiple<br>(x and y is matrix)|
-|-|`%*%`|<P align=left>`> x <- matrix(1:4, 2, 2) `<br>`> y <- matrix(rep(10, 4), 2, 2)`<br>`x %*% y`</P>|true matrix multiple
-|-<td rowspan=2 align=center>logical</td>|&&<br>&#124;&#124;|<P align=left>`x && y #true if both x and y are true`<br>`x` &#124;&#124; `y #true if either x or y are true`</p>|&& lazy.<br>It will only evaluate y if x is true|
-|-|&<br>&#124;|<P align=left>`x & y #bitwise AND, 0101 & 0011 = 0001`<br>`x` &#124; `y #bitwise OR,  0101` &#124; `0011 = 0111`</p>|& not lazy.<br>y will always be evaluated.|
-|-|"collects"<br>"combines"<br>"joins"|`c()`|<P align=left>`> x <- c(0.5, 0.6)       ## numeric`<br>`> x <- c(T, F)           ## logical`<br>`> x <- c("a", "b", "c")  ## character`<br>`> x <- 9:29              ## integer`<br>`> x <- c(1+0i, 2+4i)     ## complex`</P>|create vectors of objects
+SYMBOL NAME|SYMBOL|USED|NOTES
+:-:|:-:|---|---
+assignment|`<-`<br><br>`=`|`> x <- 5 ## nothing printed`<br>`> print(x) ## explicit printing`<br>`[1] 5 ## auto-printing occurs`|`[1]` indicates `x` is a vector <br> `5` is the first element
+comment|`#`|`> x <-  ## Incomplete expression`|-
+sequence|`:`|`> x <- 1:5`|create integer sequences<br>`1:4 + 1` is “2,3,4,5”
+sequence|`seq()`|`> seq(0,10,by=0.5)`<br>`> my_seq<-seq(5,10,length=30)`<BR>`> seq(along.with=my_seq)`<BR>`> seq_along(my_seq)`|Ranging from 0 to 10, incremented by 0.5<br>A sequence of 30 numbers between 5 and 10
+sequence|`rep()`|`> rep(0,times=40)`<BR>`> rep(c(0,1,2),times=10)`<BR>`> rep(c(0,1,2),each=10)`|contains 40 zeros<BR>contain 10 repetitions of the vector (0, 1, 2)<BR>contain 10 zeros, then 10 ones, then 10 twos
+Operators|`+ - * /`|`> x + 2`<br>`> x + c(1,2,3,4)`|`x * y` # element-wise multiple<br>(x and y is matrix)
+Operators|`%*%`|`> x <- matrix(1:4, 2, 2) `<br>`> y <- matrix(rep(10, 4), 2, 2)`<br>`x %*% y`|true matrix multiple
+logical|&&<br>&#124;&#124;|`x && y #true if both x and y are true`<br>`x` &#124;&#124; `y #true if either x or y are true`|&& lazy.<br>It will only evaluate y if x is true
+logical|&<br>&#124;|<P align=left>`x & y #bitwise AND, 0101 & 0011 = 0001`<br>`x` &#124; `y #bitwise OR,  0101` &#124; `0011 = 0111`</p>|& not lazy.<br>y will always be evaluated.
+"collects"<br>"combines"<br>"joins"|`c()`|`> x <- c(0.5, 0.6)       ## numeric`<br>`> x <- c(T, F) ## logical`<br>`> x <- c("a", "b", "c") ## character`<br>`> x <- 9:29 ## integer`<br>`> x <- c(1+0i, 2+4i) ## complex`|create vectors of objects
 
 
 ##Mixing Objects & Explicit Coercion
-|-|<td colspan=2 rowspan=2 align=center>EXPLICIT COERCION</td>
-|-|-|-|-
-|-|<P align=center>MIXING OBJECTS</P>|<P align=center>as.* functions</P>|<P align=center>Nonsensical coercion results in  NA s</P>
-|-|`> y <- c(1.7, "a")   ## character`<br>`> y <- c(TRUE, 2)    ## numeric`<br>`> y <- c("a", TRUE)  ## character<br>`|`> x <- 0:6`<br>`> class(x)`<br>`[1] "integer"`<br>`> as.numeric(x)`<br>`[1] 0 1 2 3 4 5 6`<br>`> as.logical(x)`<br>`[1] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE`<br>`> as.character(x)`<br>`[1] "0" "1" "2" "3" "4" "5" "6"`|`> x <- c("a", "b", "c")`<br>`> as.numeric(x)`<br>`[1] NA NA NA`<br>`Warning message:`<br>`NAs introduced by coercion`<br>`> as.logical(x)`<br>`[1] NA NA NA`<br>`> as.complex(x)`<br>`[1] 0+0i 1+0i 2+0i 3+0i 4+0i 5+0i 6+0i`
+|EXPLICIT COERCION|EXPLICIT COERCION
+---|---|---
+<P align=center>MIXING OBJECTS</P>|<P align=center>as.* functions</P>|<P align=center>Nonsensical coercion results in  NA s</P>
+`> y <- c(1.7, "a")   ## character`<br>`> y <- c(TRUE, 2)    ## numeric`<br>`> y <- c("a", TRUE)  ## character<br>`|`> x <- 0:6`<br>`> class(x)`<br>`[1] "integer"`<br>`> as.numeric(x)`<br>`[1] 0 1 2 3 4 5 6`<br>`> as.logical(x)`<br>`[1] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE`<br>`> as.character(x)`<br>`[1] "0" "1" "2" "3" "4" "5" "6"`|`> x <- c("a", "b", "c")`<br>`> as.numeric(x)`<br>`[1] NA NA NA`<br>`Warning message:`<br>`NAs introduced by coercion`<br>`> as.logical(x)`<br>`[1] NA NA NA`<br>`> as.complex(x)`<br>`[1] 0+0i 1+0i 2+0i 3+0i 4+0i 5+0i 6+0i`
 
 ## Factors
 
@@ -70,7 +91,8 @@ attr(,"levels")
 [1] "no"  "yes"
 ```
 
-The order of the levels can be set using the `levels` argument to `factor()`. This can be important in linear modelling because the first level is used as the baseline level.
+The order of the levels can be set using the `levels` argument to `factor()`. This can be important in linear modelling because the first level is used as the baseline level.  
+
 ```r
 > x <- factor(c("yes", "yes", "no", "yes", "no"), levels = c("yes", "no"))
 > x
@@ -121,13 +143,13 @@ A common task is to remove missing values (`NA`s).
 
 ## Vector *vs* Lists *vs* Matrices *vs* Table *vs* Data Frames
 
-|-|TYPES|INSTRUCTIONS<td colspan=2>**FUNCTIONS**</td>|EXAMPLES
-|-|:-:|-|-|-
-|-|**vector**|Elements: **same class**<br>Create empty vectors : `vector()`<td rowspan=5>`length()`<br>`head()`<br>`tail()`<br>`table()`<br>`subset()`<br>`[ ]`<br>`unique()`<br>`sum()`<br>`mean()`<br>`median()`<br>`min()`<br>`max()`<br>`which()`</td>|-|`> x<-vector("numeric",length=5)`|
-|-|**list**|Elements: **different classes**|-|`> x<-list(1,"a",TRUE,1+4i)`|
-|-|**matrix**|Elements: **same class**<br>Dimension attribute - `dim(m)`:<br>length 2 integer vector<td rowspan=3>`nrow()`<br>`ncol()`<br>`dim()`<br>`colnames()`<br>`rownames()`<br>`cbind()`<br>`rbind()`<br><br>matrix:<br>`dimnames()`</td>|`> m <- matrix(nrow=2,ncol=3) `<br>`> dim(m)`<br>`> attributes(m)`<br>`> matrix(1:6, nrow = 3)`|
-|-|**table**|Elements: **different classes**<br>Basic tabulation function<br>for *character* and *factor* vectors|`> x =c("b","g","g","b","g")`<br>`> table(x)`<br>`> y = c(1,2,1,2,1)`<br>`> table(x,y)`|
-|-|**data frame**|Elements: **different classes**<br>Special attribute: `row.names`<br>Created by: `data.frame()`<br>`read.table()` `read.csv()`<br> Convert to matrix: `data.matrix()`|`> x<-data.frame(foo=1:2,bar=c(T,F))`<br>`> nrow(x)`<br>`> ncol(x)`|
+TYPES|INSTRUCTIONS<td colspan=2>**FUNCTIONS**</td>|EXAMPLES
+:-:|:-:|---
+**vector**|Elements: **same class**<br>Create empty vectors : `vector()`<td rowspan=5>`length()`<br>`head()`<br>`tail()`<br>`table()`<br>`subset()`<br>`[ ]`<br>`unique()`<br>`sum()`<br>`mean()`<br>`median()`<br>`min()`<br>`max()`<br>`which()`</td><td rowspan=2>-</td>|`> x<-vector("numeric",length=5)`
+**list**|Elements: **different classes**|`> x<-list(1,"a",TRUE,1+4i)`
+**matrix**|Elements: **same class**<br>Dimension attribute - `dim(m)`:<br>length 2 integer vector<td rowspan=3>`nrow()`<br>`ncol()`<br>`dim()`<br>`colnames()`<br>`rownames()`<br>`cbind()`<br>`rbind()`<br><br>matrix:<br>`dimnames()`</td>|`> m <- matrix(nrow=2,ncol=3) `<br>`> dim(m)`<br>`> attributes(m)`<br>`> matrix(1:6, nrow = 3)`
+**table**|Elements: **different classes**<br>Basic tabulation function<br>for *character* and *factor* vectors|`> x =c("b","g","g","b","g")`<br>`> table(x)`<br>`> y = c(1,2,1,2,1)`<br>`> table(x,y)`
+**data frame**|Elements: **different classes**<br>Special attribute: `row.names`<br>Created by: `data.frame()`<br>`read.table()` `read.csv()`<br> Convert to matrix: `data.matrix()`|`> x<-data.frame(foo=1:2,bar=c(T,F))`<br>`> nrow(x)`<br>`> ncol(x)`
 
 ##Subseting
 ###Subseting vector and list
@@ -197,34 +219,34 @@ Matrices can be subsetted in the usual way with (_i,j_) type indices.
 
 ## Reading and Writing Data
 ### Reading
-|-|READING|NOTES|
-|-|-|
-|-|`data <- read.table("foo.txt")`|-|
-|-|`initial <- read.table("datatable.txt", nrows = 100)`<br>`classes <- sapply(initial, class)`<br>`tabAll<-read.table("datatable.txt",colClasses=classes)`|Fast: All columns are “numeric” -> `colClasses = "numeric"`<br>Save memory: Set `nrows` but not faster.<br>No commented lines: Set `comment.char = ""`
+READING|NOTES|
+---|---
+`data <- read.table("foo.txt")`|-
+`initial <- read.table("datatable.txt", nrows = 100)`<br>`classes <- sapply(initial, class)`<br>`tabAll<-read.table("datatable.txt",colClasses=classes)`|Fast: All columns are “numeric” -> `colClasses = "numeric"`<br>Save memory: Set `nrows` but not faster.<br>No commented lines: Set `comment.char = ""`
 ### Writing
-|R Objects|dput-ting|Dumping|
-|-|-|-
-|**Code**|`> y <- data.frame(a = 1, b = "a")`<br>`> dput(y)`<br>`> dput(y, file = "y.R")`<br>`> new.y <- dget("y.R")`|`> x <- "foo"`<br>`> y <- data.frame(a = 1, b = "a")`<br>`> dump(c("x", "y"), file = "data.R") `<br>`> rm(x, y)`<br>`> source("data.R")`|
-|**Explain**|Another way to pass data around is by deparsing the R object with dput and reading it back in using `dget`.|Multiple objects can be deparsed using the dump function and read back in using `source`.|
+R Objects|dput-ting|Dumping|
+---|---|---
+**Code**|`> y <- data.frame(a = 1, b = "a")`<br>`> dput(y)`<br>`> dput(y, file = "y.R")`<br>`> new.y <- dget("y.R")`|`> x <- "foo"`<br>`> y <- data.frame(a = 1, b = "a")`<br>`> dump(c("x", "y"), file = "data.R") `<br>`> rm(x, y)`<br>`> source("data.R")`
+**Explain**|Another way to pass data around is by deparsing the R object with dput and reading it back in using `dget`.|Multiple objects can be deparsed using the dump function and read back in using `source`.
 
 ### Interfaces to the Outside World
-|Read Files|FILE|GZFILE / BZFILE|URL
-|-|-|-
-|**Code**|`con <- file("foo.txt", "r")`<br>`data <- read.csv(con)`<br>`close(con)`<br>is the same as<br>`data <- read.csv("foo.txt")`|`> con <- gzfile("words.gz") `<br>`> x <- readLines(con, 10)`|`con <- url("http://www.jhsph.edu", "r")`<br>`x <- readLines(con)`<br>`> head(x)`|
-|**Explain**|1. `description`: the name of the file<br>2. `open`: a code indicating<br>-- “r” read only<br>-- “w” writing (initializing a new file)<br>-- “a” appending<br>-- “rb”, “wb”, “ab” reading, writing, or appending in binary mode (Windows)|`writeLines` takes a character vector and writes each element one line at a time to a text file.|`readLines` can be useful for reading in lines of webpages|
+Read Files|FILE|GZFILE / BZFILE|URL
+---|---|---
+**Code**|`con <- file("foo.txt", "r")`<br>`data <- read.csv(con)`<br>`close(con)`<br>is the same as<br>`data <- read.csv("foo.txt")`|`> con <- gzfile("words.gz") `<br>`> x <- readLines(con, 10)`|`con <- url("http://www.jhsph.edu", "r")`<br>`x <- readLines(con)`<br>`> head(x)`
+**Explain**|1. `description`: the name of the file<br>2. `open`: a code indicating<br>-- “r” read only<br>-- “w” writing (initializing a new file)<br>-- “a” appending<br>-- “rb”, “wb”, “ab” reading, writing, or appending in binary mode (Windows)|`writeLines` takes a character vector and writes each element one line at a time to a text file.|`readLines` can be useful for reading in lines of webpages
 
 ##Control Structures
 See ControlStructures.pdf
 
 ##Dates & Time
 
-|-|DATE<td colspan=2 align=center>**TIME**</td>
-|-|-|-|-
-|**Class**|`Date` class|`POSIXct`|`POSIXlt`
-|**Code**|`x <- as.Date("1970-01-01")`<br>`unclass(x) ## [1] 0`<br>`unclass(as.Date("1970-01-02")) ## [1] 1`|`x <- Sys.time() ## ‘POSIXct’ format`<br>`x  ## [1] "2013-01-24 22:04:14 EST"`<br>`unclass(x) ## [1] 1359083054`<br>`x$sec ## Error: ...atomic vectors`<br>`p <- as.POSIXlt(x)`<br>`p$sec ## [1] 14.37`|`x <- Sys.time()`<br>`x ## [1] "2013-01-24 22:04:14 EST"`<br>`p <- as.POSIXlt(x)`<br>`names(unclass(p))## [1] "sec"...`<br>`p$sec ## [1] 14.34`|
-|**Explain**|-|a very large integer under the hood<br>store in something like *data frame*|a list underneath<br>store a bunch of other useful information like:<br>- *day of the week*<br>- *day of the year, month*<br>- *day of the month*|
-|**Format**<td colspan=3>`datestring <- c("January 10, 2012 10:40", "December 9, 2011 9:10")`<br>`x <- strptime(datestring, "%B %d, %Y %H:%M")`<br>`x ## [1] "2012-01-10 10:40:00 EST" "2011-12-09 09:10:00 EST"`<br>`class(x) ## [1] "POSIXlt" "POSIXt"`<br>`?strptime`</td>
-|**Operate**<td colspan=3>`x <- as.Date("2012-01-01") # Date class`<br>`x <- as.POSIXlt(x) # Change to POSIXlt for x-y`<br>`y <- strptime("9 Jan 2011 11:34:21", "%d %b %Y %H:%M:%S")`<br>`x-y ## Time difference of 356.3 days`<br><br>`x <- as.Date("2012-03-01") y <- as.Date("2012-02-28")`<br>`x-y ## Time difference of 2 days`<br>`x <- as.POSIXct("2012-10-25 01:00:00")`<br>`y <- as.POSIXct("2012-10-25 06:00:00", tz = "GMT")`<br>`y-x ## Time difference of 1 hours`</td>
+-|-|DATE<td colspan=2 align=center>**TIME**</td>
+---|---
+1|**Class**|`Date` class|`POSIXct`|`POSIXlt`
+2|**Code**|`x <- as.Date("1970-01-01")`<br>`unclass(x) ## [1] 0`<br>`unclass(as.Date("1970-01-02")) ## [1] 1`|`x <- Sys.time() ## ‘POSIXct’ format`<br>`x  ## [1] "2013-01-24 22:04:14 EST"`<br>`unclass(x) ## [1] 1359083054`<br>`x$sec ## Error: ...atomic vectors`<br>`p <- as.POSIXlt(x)`<br>`p$sec ## [1] 14.37`|`x <- Sys.time()`<br>`x ## [1] "2013-01-24 22:04:14 EST"`<br>`p <- as.POSIXlt(x)`<br>`names(unclass(p))## [1] "sec"...`<br>`p$sec ## [1] 14.34`
+3|**Explain**|-|a very large integer under the hood<br>store in something like *data frame*|a list underneath<br>store a bunch of other useful information like:<br>- *day of the week*<br>- *day of the year, month*<br>- *day of the month*
+4|**Format**<td colspan=3>`datestring <- c("January 10, 2012 10:40", "December 9, 2011 9:10")`<br>`x <- strptime(datestring, "%B %d, %Y %H:%M")`<br>`x ## [1] "2012-01-10 10:40:00 EST" "2011-12-09 09:10:00 EST"`<br>`class(x) ## [1] "POSIXlt" "POSIXt"`<br>`?strptime`</td>
+5|**Operate**<td colspan=3>`x <- as.Date("2012-01-01") # Date class`<br>`x <- as.POSIXlt(x) # Change to POSIXlt for x-y`<br>`y <- strptime("9 Jan 2011 11:34:21", "%d %b %Y %H:%M:%S")`<br>`x-y ## Time difference of 356.3 days`<br><br>`x <- as.Date("2012-03-01") y <- as.Date("2012-02-28")`<br>`x-y ## Time difference of 2 days`<br>`x <- as.POSIXct("2012-10-25 01:00:00")`<br>`y <- as.POSIXct("2012-10-25 06:00:00", tz = "GMT")`<br>`y-x ## Time difference of 1 hours`</td>
 
 ##Functions
 see functions.pdf
