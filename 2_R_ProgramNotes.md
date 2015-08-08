@@ -241,7 +241,7 @@ See ControlStructures.pdf
 ## Dates & Time
 
 NO|NAME|DATE|**TIME**: `POSIXct`|**TIME**: `POSIXlt`|**TIME**: `strptime()`
----|---|---|---|---|---
+:-:|:-:|---|---|---|---
 1|**Code**|`x <- as.Date("1970-01-01")`<br>`unclass(x) ## [1] 0`<br>`unclass(as.Date("1970-01-02"))`<br>`## [1] 1`|`x <- Sys.time() ## ‘POSIXct’ format`<br>`x  ## [1] "2013-01-24 22:04:14 EST"`<br>`unclass(x) ## [1] 1359083054`<br>`x$sec ## Error: ...atomic vectors`<br>`p <- as.POSIXlt(x)`<br>`p$sec ## [1] 14.37`|`x <- Sys.time()`<br>`x ## [1] "2013-01-24 22:04:14 EST"`<br>`p <- as.POSIXlt(x)`<br>`names(unclass(p))## [1] "sec"...`<br>`p$sec ## [1] 14.34`|`x <- c("1jan1960", "2jan1960",`<br>` "31mar1960", "30jul1960")`<br>`z <- strptime(x, "%d%b%Y")`<br>`## Sys.setlocale("LC_TIME", lct)`<br>`strptime("20/2/06 11:16:16.683",`<br>` "%d/%m/%y %H:%M:%OS")`
 2|**Explain**|representing calendar dates|a very large integer under the hood<br>store in something like *data frame*|a list underneath<br>store a bunch of other useful information like:<br>- *day of the week*<br>- *day of the year, month*<br>- *day of the month*|directly convert character vectors<br>(of a variety of formats) to POSIXlt format.
 3|**Format**<td colspan=4>`datestring <- c("January 10, 2012 10:40", "December 9, 2011 9:10")`<br>`x <- strptime(datestring, "%B %d, %Y %H:%M")`<br>`x ## [1] "2012-01-10 10:40:00 EST" "2011-12-09 09:10:00 EST"`<br>`class(x) ## [1] "POSIXlt" "POSIXt"`<br>`?strptime`</td>
@@ -254,14 +254,14 @@ see functions.pdf
 see Scoping.pdf
 
 ## Loop Functions
-|-|NAME|HOW|CODE|EXPLAIN
-|-|-|-|-|-
-|-|**lapply**|Loop over a list<br>Evaluate a function on each element<br>Always returns a list|`x <- list(a = 1:5, b = rnorm(10))`<br>`lapply(x, mean)`<br>`> x<-list(a=matrix(1:4,2,2),b=matrix(1:6,3,2))`<br>`> lapply(x, function(elt) elt[,1])`|-|
-|-|**sapply**|Same as `lapply`<br>But try to simplify the result|`> x <- list(a=1:4,b=rnorm(10),c=rnorm(20,1))`<br>`> sapply(x, mean)`|each length: 1, RE: vector<br>each length: ==&>1, RE: matrix<br>can’t figure out, RE: list|
-|-|**apply**|Evaluate a function<br>over the margins of an array|`> x <- matrix(rnorm(200), 20, 10)`<br>`> apply(x, 2, mean)`<br>`> apply(x, 1, sum)`<br>`> x <- matrix(rnorm(200), 20, 10)`<br><br>The shortcut functions are _much_ faster<br>- `rowSums` = `apply(x, 1, sum)`<br>- `rowMeans` = `apply(x, 1, mean)`<br>- `colSums` = `apply(x, 2, sum)`<br>- `colMeans` = `apply(x, 2, mean)`<br><br>Quantiles of the rows of a matrix.<br>`> apply(x, 1, quantile, probs =c(0.25,0.75))`<br><br>Average matrix in an array<br>`> a <- array(rnorm(2 * 2 * 10), c(2, 2, 10))`<br>`> apply(a, c(1, 2), mean)`<br>`> rowMeans(a, dims = 2)`|-|
-|-|**vapply**|Same as `sapply`<br>Specify the format of output<br>Faster than `sapply()` (large datasets)|`vapply(flags,unique,numeric(1))`<br>`vapply(flags,class,character(1))`|Expect each element of the result :<br> a numeric vector of length 1<br>a character vector of length 1|
-|-|**tapply**|Apply a function<br>over subsets of a vector|`> x <- c(rnorm(10), runif(10), rnorm(10, 1))`<br>`> f <- gl(3, 10)`<br>`> tapply(x, f, mean)`<br><br>`#without simplification`<br>`> tapply(x, f, mean, simplify = FALSE)`<br><br>`#Find group ranges.`<br>`> tapply(x, f, range)`<br><br>#Group by `flags$red`<br>`> tapply(flags$population,flags$red,summary)`|Split data into groups based on the value of some variable, then apply a function to each group|
-|-|**mapply**|Multivariate version of `lapply`|`list(rep(1,4),rep(2,3),rep(3,2),rep(4,1))`<br>same as:<br>`> mapply(rep, 1:4, 4:1)`<br><br>`noise <- function(n, mean, sd) {`<br>`rnorm(n, mean, sd)`<br>`}`<br><br>`> mapply(noise, 1:5, 1:5, 2)`<br>same as:<br>`> list(noise(1, 1, 2), noise(2, 2, 2),`<br>`noise(3, 3, 2), noise(4, 4, 2),`<br>`noise(5, 5, 2))`|-|
+NAME|HOW|CODE|EXPLAIN
+:-:|---|---|---
+**lapply**|Loop over a list<br>Evaluate a function on each element<br>Always returns a list|`x <- list(a = 1:5, b = rnorm(10))`<br>`lapply(x, mean)`<br>`> x<-list(a=matrix(1:4,2,2),b=matrix(1:6,3,2))`<br>`> lapply(x, function(elt) elt[,1])`|-
+**sapply**|Same as `lapply`<br>But try to simplify the result|`> x <- list(a=1:4,b=rnorm(10),c=rnorm(20,1))`<br>`> sapply(x, mean)`|each length: 1, RE: vector<br>each length: ==&>1, RE: matrix<br>can’t figure out, RE: list
+**apply**|Evaluate a function<br>over the margins of an array|`> x <- matrix(rnorm(200), 20, 10)`<br>`> apply(x, 2, mean)`<br>`> apply(x, 1, sum)`<br>`> x <- matrix(rnorm(200), 20, 10)`<br><br>The shortcut functions are _much_ faster<br>- `rowSums` = `apply(x, 1, sum)`<br>- `rowMeans` = `apply(x, 1, mean)`<br>- `colSums` = `apply(x, 2, sum)`<br>- `colMeans` = `apply(x, 2, mean)`<br><br>Quantiles of the rows of a matrix.<br>`> apply(x, 1, quantile, probs =c(0.25,0.75))`<br><br>Average matrix in an array<br>`> a <- array(rnorm(2 * 2 * 10), c(2, 2, 10))`<br>`> apply(a, c(1, 2), mean)`<br>`> rowMeans(a, dims = 2)`|-
+**vapply**|Same as `sapply`<br>Specify the format of output<br>Faster than `sapply()` (large datasets)|`vapply(flags,unique,numeric(1))`<br>`vapply(flags,class,character(1))`|Expect each element of the result :<br> a numeric vector of length 1<br>a character vector of length 1
+**tapply**|Apply a function<br>over subsets of a vector|`> x <- c(rnorm(10), runif(10), rnorm(10, 1))`<br>`> f <- gl(3, 10)`<br>`> tapply(x, f, mean)`<br><br>`#without simplification`<br>`> tapply(x, f, mean, simplify = FALSE)`<br><br>`#Find group ranges.`<br>`> tapply(x, f, range)`<br><br>#Group by `flags$red`<br>`> tapply(flags$population,flags$red,summary)`|Split data into groups based on the value of some variable, then apply a function to each group
+**mapply**|Multivariate version of `lapply`|`list(rep(1,4),rep(2,3),rep(3,2),rep(4,1))`<br>same as:<br>`> mapply(rep, 1:4, 4:1)`<br><br>`noise <- function(n, mean, sd) {`<br>`rnorm(n, mean, sd)`<br>`}`<br><br>`> mapply(noise, 1:5, 1:5, 2)`<br>same as:<br>`> list(noise(1, 1, 2), noise(2, 2, 2),`<br>`noise(3, 3, 2), noise(4, 4, 2),`<br>`noise(5, 5, 2))`|-
 
 ### split
 
@@ -298,13 +298,13 @@ see Scoping.pdf
 ```
 
 ## Debugging
-|-|NAME|EXPLAIN|CODE
-|-|-|-|-
-|-|`traceback`|prints out the function call stack after an error occurs; does nothing if there’s no error|`> lm(y ~ x)`<br>`> traceback()`
-|-|`debug`|flags a function for “debug” mode which allows you to step through execution of a function one line at a time|`> debug(lm)`<br>`> lm(y ~ x)`
-|-|`browser`|suspends the execution of a function wherever it is called and puts the function in debug mode|-
-|-|`trace`|allows you to insert debugging code into a function a specific places|-
-|-|`recover`|allows you to modify the error behavior so that you can browse the function call stack|`> options(error=recover)`<br>`> read.csv("nosuchfile")`
+NAME|EXPLAIN|CODE
+---|---|---
+`traceback`|prints out the function call stack after an error occurs; does nothing if there’s no error|`> lm(y ~ x)`<br>`> traceback()`
+`debug`|flags a function for “debug” mode which allows you to step through execution of a function one line at a time|`> debug(lm)`<br>`> lm(y ~ x)`
+`browser`|suspends the execution of a function wherever it is called and puts the function in debug mode|-
+`trace`|allows you to insert debugging code into a function a specific places|-
+`recover`|allows you to modify the error behavior so that you can browse the function call stack|`> options(error=recover)`<br>`> read.csv("nosuchfile")`
 
 ## Profiling
 ### Using `system.time()`
