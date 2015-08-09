@@ -578,14 +578,7 @@ log μ = \beta_0 + \beta_1x
 $$
 `\( \del \cdot \vec{B} = 0 \)`
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [['$','$'], ['\\(','\\)']],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
-    }
-  });
-</script>
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+
+
+<script type="text/javascript" src="lib/mathjax-in-github.user.js">
 </script>
