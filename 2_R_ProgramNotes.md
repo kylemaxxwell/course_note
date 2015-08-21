@@ -127,7 +127,7 @@ TYPES|INSTRUCTIONS<td colspan=2>**FUNCTIONS**</td>|EXAMPLES
 :-:|:-:|---
 **vector**|Elements: **same class**<br>Create empty vectors : `vector()`<td rowspan=5>`length()`<br>`head()`<br>`tail()`<br>`table()`<br>`subset()`<br>`[ ]`<br>`unique()`<br>`sum()`<br>`mean()`<br>`median()`<br>`min()`<br>`max()`<br>`which()`</td><td rowspan=2>`paste()`</td>|`> x<-vector("numeric",length=5)`
 **list**|Elements: **different classes**|`> x<-list(1,"a",TRUE,1+4i)`
-**matrix**|Elements: **same class**<br>Dimension attribute - `dim(m)`:<br>length 2 integer vector<td rowspan=3>`nrow()`<br>`ncol()`<br>`dim()`<br>`colnames()`<br>`rownames()`<br>`cbind()`<br>`rbind()`<br>`attributes()`<br><br>matrix:<br>`dimnames()`</td>|`> m <- matrix(nrow=2,ncol=3) `<br>`> dim(m)`<br>`> attributes(m)`<br>`> matrix(1:6, nrow = 3)`
+**matrix**|Elements: **same class**<br>Dimension attribute - `dim(m)`:<br>length 2 integer vector<td rowspan=3>`nrow()`<br>`ncol()`<br>`dim()`<br>`colnames()`<br>`rownames()`<br>`cbind()`<br>`rbind()`<br>`attributes()`<br><br>matrix:<br>`dimnames()`</td>|`> m <- matrix(nrow=2,ncol=3) `<br>`> dim(m)`<br>`> attributes(m)`<br>`# fill the rows first`<br>`> matrix(1:6,ncol=3,byrow=TRUE)`
 **table**|Elements: **different classes**<br>Basic tabulation function<br>for *character* and *factor* vectors|`> x =c("b","g","g","b","g")`<br>`> table(x)`<br>`> y = c(1,2,1,2,1)`<br>`> table(x,y)`
 **data frame**|Elements: **different classes**<br>Special attribute: `row.names`<br>Created by: `data.frame()`<br>`read.table()` `read.csv()`<br> Convert to matrix: `data.matrix()`|`> x<-data.frame(foo=1:2,bar=c(T,F))`<br>`> nrow(x)`<br>`> ncol(x)`
 
