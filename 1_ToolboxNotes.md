@@ -176,6 +176,15 @@ search()
 ls("package:ggplot2")
 library(help=ggplot2)
 ```
+- Unload R Package from the search() path of available R objects
+```r
+detach("package:ggplot2")
+```
+- Remove R objects
+```r
+remove(list=ls()) ## remove all objects
+remove(list=ls()[!(ls() %in% c("NEI","SCC"))]) ## remove all objects without NEI and SCC
+```
 ### Rtools
 * A collection of tools necessary for building R packages in Windows
 * If you aren't sure, enter ```find.package("devtools")``` in the console

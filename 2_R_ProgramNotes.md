@@ -263,10 +263,10 @@ See ControlStructures.pdf
 
 ## Dates & Time
 
-NO|NAME|DATE|**TIME**: `POSIXct`|**TIME**: `POSIXlt`|**TIME**: `strptime()`
-:-:|:-:|---|---|---|---
-1|**Code**|`s<-Sys.Date()`<br>`unclass(s) #since 1970-01-01`<br>`x <- as.Date("1970-01-01")`<br>`unclass(x) ## [1] 0`<br>`unclass(as.Date("1970-01-02"))`<br>`## [1] 1`|`x <- Sys.time() ## ‘POSIXct’ format`<br>`x  ## [1] "2013-01-24 22:04:14 EST"`<br>`unclass(x) ## [1] 1359083054`<br>`x$sec ## Error: ...atomic vectors`<br>`p <- as.POSIXlt(x)`<br>`p$sec ## [1] 14.37`|`x <- Sys.time()`<br>`x ## [1] "2013-01-24 22:04:14 EST"`<br>`p <- as.POSIXlt(x)`<br>`names(unclass(p))## [1] "sec"...`<br>`p$sec ## [1] 14.34`|`x <- c("1jan1960", "2jan1960",`<br>` "31mar1960", "30jul1960")`<br>`z <- strptime(x, "%d%b%Y")`<br>`## Sys.setlocale("LC_TIME", lct)`<br>`strptime("20/2/06 11:16:16.683",`<br>` "%d/%m/%y %H:%M:%OS")`
-2|**Explain**|representing calendar dates|`Sys.time()` returns an object of class POSIXct<BR>a very large integer under the hood<br>store in something like *data frame*|a list underneath<br>store a bunch of other useful information like:<br>- *day of the week*<br>- *day of the year, month*<br>- *day of the month*|Directly convert character vectors<br>(of a variety of formats) to POSIXlt format.<BR>Similar to `as.POSIXlt()`, except that the input doesn't have to be in a particular format (YYYY-MM-DD).
+DATE|**TIME**: `POSIXct`|**TIME**: `POSIXlt`|**TIME**: `strptime()`
+---|---|---|---
+`s<-Sys.Date()`<br>`unclass(s) #since 1970-01-01`<br>`x <- as.Date("1970-01-01")`<br>`unclass(x) ## [1] 0`<br>`unclass(as.Date("1970-1-2"))`<br>`## [1] 1`|`x <- Sys.time() # ‘POSIXct’ format`<br>`x  ## [1] "2013-01-24 22:04:14 EST"`<br>`unclass(x) ## [1] 1359083054`<br>`x$sec ## Error: ...atomic vectors`<br>`p <- as.POSIXlt(x)`<br>`p$sec ## [1] 14.37`|`x <- Sys.time()`<br>`[1] "2013-01-24 22:04:14 EST"`<br>`p <- as.POSIXlt(x)`<br>`names(unclass(p))`<br>`# [1] "sec"...`<br>`p$sec ## [1] 14.34`|`x <- c("1jan1960", "2jan1960",`<br>` "31mar1960", "30jul1960")`<br>`z <- strptime(x, "%d%b%Y")`<br>`## Sys.setlocale("LC_TIME",lct)`<br>`strptime("2/2/06 11:16:16.683",`<br>` "%d/%m/%y %H:%M:%OS")`
+representing calendar dates|`Sys.time()` returns an object of class POSIXct<BR>a very large integer under the hood<br>store in something like *data frame*|a list underneath<br>store a bunch of other useful information like:<br>- *day of the week*<br>- *day of the year, month*<br>- *day of the month*|Directly convert character vectors<br>(of a variety of formats) to POSIXlt format.<BR>Similar to `as.POSIXlt()`, except that the input doesn't have to be in a particular format (YYYY-MM-DD).
 
 
 - **Format**
@@ -573,12 +573,6 @@ The `sample` function draws randomly from a specified set of (scalar) objects al
 > sample(1:10)       #[1]  2  3  4  1  9  5 10  8  6  7
 > sample(1:10, replace = TRUE)       ## Sample w/replacement [1] 2 9 7 8 2 8 5 9 7 8
 ```
-$$
-log μ = \beta_0 + \beta_1x
-$$
-`\( \del \cdot \vec{B} = 0 \)`
-
-
 
 <script type="text/javascript" src="lib/mathjax-in-github.user.js">
 </script>
