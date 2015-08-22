@@ -574,5 +574,14 @@ The `sample` function draws randomly from a specified set of (scalar) objects al
 > sample(1:10, replace = TRUE)       ## Sample w/replacement [1] 2 9 7 8 2 8 5 9 7 8
 ```
 
-<script type="text/javascript" src="lib/mathjax-in-github.user.js">
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  });
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>

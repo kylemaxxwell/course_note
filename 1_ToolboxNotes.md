@@ -169,6 +169,10 @@ head(rownames(a), 3)  ## Show the names of the first few packages
 install.packages("slidify")
 install.packages(c("slidify", "ggplot2", "devtools"))
 ```
+- List installed R Packages
+```r
+rownames(installed.packages())
+```
 - Loading R Packages and list packages that have been installed
 ```r
 library(ggplot2)
