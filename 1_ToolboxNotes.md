@@ -184,6 +184,14 @@ library(help=ggplot2)
 ```r
 detach("package:ggplot2")
 ```
+- Update Package  
+```r
+update.packages()
+```
+- Remove Package  
+```r
+remove.packages("data.table")
+```
 - Remove R objects
 ```r
 remove(list=ls()) ## remove all objects
