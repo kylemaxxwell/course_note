@@ -89,6 +89,7 @@ logical|`which()`|`> which(ints>7)`|Argument: a logical vector<br> Return: the i
 logical|`any()`|`> any(ints<0) #[1] FALSE`|if any of the elements of ints are less than 0
 logical|`all()`|`> all(ints>0) #[1] TRUE`|if all of the elements of ints are greater than 0
 "collects"<br>"combines"<br>"joins"|`c()`|`> x <- c(0.5, 0.6)       ## numeric`<br>`> x <- c(T, F) ## logical`<br>`> x <- c("a", "b", "c") ## character`<br>`> x <- 9:29 ## integer`<br>`> x <- c(1+0i, 2+4i) ## complex`|create vectors of objects
+Value Matching|`%in%`|`>(day %in% c("Monday","Tuesday"))[1:2]`<BR>`# which indices are true?`<BR>`> which(dat$day %in% c("Monday",`<BR>`"Tuesday"))[1:20]`|returns a logical vector indicating if there is a match or not for its left operand.
 
 ## Factors
 
@@ -214,6 +215,7 @@ $bar
 > x$a          # [1] 1 2 3 4 5
 > x[["a"]]     # NULL
 > x[["a", exact = FALSE]]     # [1] 1 2 3 4 5
+
 ```
 ### Subseting matrix and table and data frame
 Matrices can be subsetted in the usual way with (_i,j_) type indices.
@@ -237,7 +239,10 @@ Matrices can be subsetted in the usual way with (_i,j_) type indices.
 > x[1, , drop = FALSE]
      [,1] [,2] [,3]
 [1,]    1    3    5
-> x[1:3, c(2,3]
+> x[1:3, c(2,3)]
+
+# Remove column
+> tmp$daily = NULL
 ```
 
 ## Reading and Writing Data
