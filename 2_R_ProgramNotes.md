@@ -4,13 +4,13 @@ Version 1.0
 1. [Workspace and Files](#workspace-and-files)
 2. [Looking at Data](#looking-at-data)
 3. [Objects](#objects)
-	- [Mixing Objects & Explicit Coercion](#mixing-objects--explicit-coercion)
+	- [Mixing Objects and Explicit Coercion](#mixing-objects-and-explicit-coercion)
 4. [Numbers](#numbers)
 5. [Attributes](#attributes)
-6. [Entering Input & Evaluation & Printing & Creating Vectors](#entering input--evaluation--printing--creating-vectors)
+6. [Entering Input and Evaluation and Printing and Creating Vectors](#entering-input-and-evaluation-and-printing-and-creating-vectors)
 7. [Factors](#factors)
 8. [Vector vs Lists vs Matrices vs Table vs Data Frames](#vector-vs-lists-vs-matrices-vs-table-vs-data-frames)
-9. [Missing Values & Removing NA](#missing-values--removing-na)
+9. [Missing Values and Removing NA](#missing-values-and-removing-na)
 	- [Missing values](#missing-values)
 	- [Removing NA Values](#removing-na-values)
 10. [Subseting](#subseting)
@@ -21,14 +21,14 @@ Version 1.0
 	- [Writing](#writing)
 	- [Interfaces to the Outside World](#interfaces-to-the-outside-world)
 12. [Control Structures](#control-structures)
-13. [Dates & Time](#dates--time)
+13. [Dates and Time](#dates-and-time)
 14. [Functions](#functions)
 15. [Scoping Rules](#scoping-rules)
 16. [Loop Functions](#loop-functions)
 	- [split](#split)
 17. [Debugging](#debugging)
 18. [Profiling](#profiling)
-	- [Using system.time()](#using-systemtime)
+	- [Using system.time()](#using-system-time)
 	- [The R Profiler](#the-r-profiler)
 19. [Simulation](#simulation)
 	- [Generating Random Numbers](#generating-random-numbers)
@@ -85,7 +85,7 @@ NO|FLOW
 
 Notes: `identical(vect,vect2)` test two objects for being exactly equal, return TURE or FALSE.
 
-### Mixing Objects & Explicit Coercion
+### Mixing Objects and Explicit Coercion
 |EXPLICIT COERCION|EXPLICIT COERCION
 ---|---|---
 <P align=center>MIXING OBJECTS</P>|<P align=center>as.* functions</P>|<P align=center>Nonsensical coercion results in  NA s</P>
@@ -107,7 +107,7 @@ Notes: `identical(vect,vect2)` test two objects for being exactly equal, return 
 - length
 - others user-defined attributes/metadata
 
-## Entering Input & Evaluation & Printing & Creating Vectors
+## Entering Input and Evaluation and Printing and Creating Vectors
 SYMBOL NAME|SYMBOL|USED|NOTES
 :-:|:-:|---|---
 assignment|`<-`<br><br>`=`|`> x <- 5 ## nothing printed`<br>`> print(x) ## explicit printing`<br>`[1] 5 ## auto-printing occurs`|`[1]` indicates `x` is a vector <br> `5` is the first element
@@ -186,7 +186,7 @@ TYPES|INSTRUCTIONS<td colspan=2>**FUNCTIONS**</td>|EXAMPLES
 **table**|Elements: **different classes**<br>Basic tabulation function<br>for *character* and *factor* vectors|`> x =c("b","g","g","b","g")`<br>`> table(x)`<br>`> y = c(1,2,1,2,1)`<br>`> table(x,y)`
 **data frame**|Elements: **different classes**<br>Special attribute: `row.names`<br>Created by: `data.frame()`<br>`read.table()` `read.csv()`<br> Convert to matrix: `data.matrix()`|`> x<-data.frame(foo=1:2,bar=c(T,F))`<br>`> nrow(x)`<br>`> ncol(x)`
 
-## Missing Values & Removing NA
+## Missing Values and Removing NA
 ### Missing values  
 Missing values are denoted by `NA` or `NaN` for undefined mathematical operations.  
 - `is.na()` is a logical test for which variables are missing.
@@ -320,7 +320,7 @@ Read Files|FILE|GZFILE / BZFILE|URL
 ## Control Structures  
 See ControlStructures.pdf
 
-## Dates & Time
+## Dates and Time
 
 DATE|**TIME**: `POSIXct`|**TIME**: `POSIXlt`|**TIME**: `strptime()`
 ---|---|---|---
@@ -456,7 +456,7 @@ NAME|EXPLAIN|CODE
 `recover`|allows you to modify the error behavior so that you can browse the function call stack|`> options(error=recover)`<br>`> read.csv("nosuchfile")`
 
 ## Profiling
-### Using `system.time()`
+### Using system time
 * Returns an object of class `proc_time`
   The first two entries are the total **user** and **system** CPU times of the current R process and any child processes on which it has waited, and the third entry is the ‘real’ **elapsed** time since the process was started.
   - **user time**: the CPU time charged for the execution of user instructions of the calling process (your code)
@@ -623,7 +623,7 @@ Suppose we want to simulate from a Poisson model where Y ~ Poisson(μ) and log �
 ```
 ### Random Sampling
 The `sample` function draws randomly from a specified set of (scalar) objects allowing you to sample from arbitrary distributions.
-```r
+```R
 > set.seed(1)
 > sample(1:10, 4)    #[1] 3 4 5 7
 > sample(1:10, 4)    #[1] 3 9 8 5
