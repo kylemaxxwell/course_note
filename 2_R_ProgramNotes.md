@@ -1,6 +1,40 @@
 # Course of R Programming Notes #
 Version 1.0
 
+1. [Workspace and Files](#workspace-and-files)
+2. [Looking at Data](#looking-at-data)
+3. [Objects](#objects)
+	- [Mixing Objects & Explicit Coercion](#mixing-objects--explicit-coercion)
+4. [Numbers](#numbers)
+5. [Attributes](#attributes)
+6. [Entering Input & Evaluation & Printing & Creating Vectors](#entering input--evaluation--printing--creating-vectors)
+7. [Factors](#factors)
+8. [Vector vs Lists vs Matrices vs Table vs Data Frames](#vector-vs lists-vs-matrices-vs-table-vs-data-frames)
+9. [Missing Values & Removing NA](#missing-values--removing-na)
+	- [Missing values](#missing-values)
+	- [Removing NA Values](#removing-na-values)
+10. [Subseting](#subseting)
+	- [Subseting vector and list](#subseting-vector-and-list)
+	- [Subseting matrix and table and data frame](#subseting-matrix-and-table-and-data-frame)
+11. [Reading and Writing Data](#reading-and-writing-data)
+	- [Reading](#reading)
+	- [Writing](#writing)
+	- [Interfaces to the Outside World](#interfaces-to-the-outside-world)
+12. [Control Structures](#control-structures)
+13. [Dates & Time](#dates--time)
+14. [Functions](#functions)
+15. [Scoping Rules](#scoping-rules)
+16. [Loop Functions](#loop-functions)
+	- [split](#split)
+17. [Debugging](#debugging)
+18. [Profiling](#profiling)
+	- [Using system.time()](#using-systemtime)
+	- [The R Profiler](#the-r-profiler)
+19. [Simulation](#simulation)
+	- [Generating Random Numbers](#generating-random-numbers)
+	- [Generating Random Numbers From a Linear Model](#generating-random-numbers-from-a-linear-model)
+	- [Generating Random Numbers From a Generalized Linear Model](#generating-random-numbers-from-a-generalized-linear-model)
+	- [Random Sampling](#random-sampling)
 ----------
 ## Workspace and Files
 Command|Explain
@@ -506,7 +540,7 @@ NAME|EXPLAIN|CODE
 	plotProfileCallGraph(readProfileData(tmp), score = "total")
 	```
 
-## Simulation ##
+## Simulation
 ### Generating Random Numbers
 Functions for probability distributions in R
 - `rnorm`: generate random Normal variates with a given mean and standard deviation

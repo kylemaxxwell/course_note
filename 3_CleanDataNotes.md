@@ -4,11 +4,12 @@ Version 1.0
 1. [The Tidy Data](#the-tidy-data)
 2. [The Code Book](#the-code-book)
 3. [Downloading Files](#downloading-files)
-4. [Sorting and ordering and Creating categorical variables](#sorting-and-ordering-and-creating-categorical-variables)
-5. [Summarizing Data](#summarizing-data)
-6. [Reshaping Data](#reshaping-data)
-7. [Reading Files](#reading-files)
-8. [data.table vs. dplyr in simple](#datatable-vs-dplyr-in-simple)
+4. [Common transforms](#common-transforms)
+5. [Sorting and ordering and Creating categorical variables](#sorting-and-ordering-and-creating-categorical-variables)
+6. [Summarizing Data](#summarizing-data)
+7. [Reshaping Data](#reshaping-data)
+8. [Reading Files](#reading-files)
+9. [data.table vs. dplyr in simple](#datatable-vs-dplyr-in-simple)
 
 ----------
 ## The Tidy Data 
@@ -50,6 +51,22 @@ Version 1.0
 	## Method 2
 	library(RCurl)
 	```
+
+## Common transforms
+FUNCTION|DESCRIPTION
+---|---
+`abs(x)`|absolute value
+`sqrt(x)`|square root
+`ceiling(x)`|`ceiling(3.475)` is 4
+`floor(x)`|`floor(3.475)` is 3
+`trunc(x)`|`trunc(5.99)` is 5
+`round(x, digits=n)`|`round(3.475, digits=2)` is 3.48
+`signif(x, digits=n)`|`signif(3.475, digits=2)` is 3.5
+`cos(x)`, `sin(x)`, `tan(x)`|also `acos(x)`, `cosh(x)`, `acosh(x)`, etc.
+`log(x)`|natural logarithm
+`log2(x)`,`log10(x)`|common logarithm
+`exp(x)`|ex
+OTHERS|[Built-in Functions](http://statmethods.net/management/functions.html)
 
 ## Sorting and ordering and Creating categorical variables
 **`sort(x, decreasing=FALSE)`**: returns an **object** that has been sorted/ordered.
@@ -137,14 +154,15 @@ TITLE|SCRIPT
 9. Creating a new variable|`spraySums <- ddply(InsectSprays,.(spray),summarize,sum=ave(count,FUN=sum))`
 
 ### More information
-> http://had.co.nz/reshape/
-> But *cast() can replace table() for computing frequency/contingency tables and crosstabs
-> Formula notation allows you to pick out specificcolumns so wide data can look molten
-> reshape2 package on [CRAN](http://cran.r-project.org/web/packages/reshape2/)
-Hadley's [github](https://github.com/hadley/reshape) (bleeding edge)
-Decision Stats: [“Using Reshape2 for transposing datasets in R”](http://decisionstats.com/2010/11/06/using-reshape2-for-transposing-datasets-in-r/)
-Recology: [“Good riddance to Excel pivot tables”](http://r-ecology.blogspot.com/2011/01/good-riddance-to-excel-pivot-tables.html)
-Stack Overflow discussions: [“[r] reshape2”](http://stackoverflow.com/search?tab=votes&q=[r]%20reshape2)
+> - http://had.co.nz/reshape/
+> - But *cast() can replace table() for computing frequency/contingency tables and crosstabs.
+> - Formula notation allows you to pick out specificcolumns so wide data can look molten.
+> - reshape2 package on [CRAN](http://cran.r-project.org/web/packages/reshape2/)
+>- Hadley's [github](https://github.com/hadley/reshape) (bleeding edge)
+>- Decision Stats: [“Using Reshape2 for transposing datasets in R”](http://decisionstats.com/2010/11/06/using-reshape2-for-transposing-datasets-in-r/)
+>- Recology: [“Good riddance to Excel pivot tables”](http://r-ecology.blogspot.com/2011/01/good-riddance-to-excel-pivot-tables.html)
+>- Stack Overflow discussions: [“[r] reshape2”](http://stackoverflow.com/search?tab=votes&q=[r]%20reshape2)
+>- A good [plyr primer](http://www.r-bloggers.com/a-quick-primer-on-split-apply-combine-problems/)
 
 ## Reading Files
 TYPE|USAGE
