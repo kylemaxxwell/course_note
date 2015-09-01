@@ -10,6 +10,9 @@ Version 1.0
 7. [Reshaping Data](#reshaping-data)
 8. [Reading Files](#reading-files)
 9. [data.table vs dplyr in simple](#datatable-vs-dplyr-in-simple)
+10. [Merging Data](#merging-data)
+11. [Overview of joins](#overview-of-joins)
+12. [Merge in basic data.table and plyr](#merge-in-basic-data-table-and-plyr)
 
 ----------
 ## The Tidy Data 
@@ -194,7 +197,7 @@ TYPE|USAGE
 ## Merging Data
 ### Overview of joins
 ![](http://i.imgur.com/71MgaPO.jpg)
-
+### Merge in basic data table and plyr
 BASIC MERGE|DATA.TABLE MERGE|PLYR MERGE
 ---|---|---
 **Natural join**<BR>To keep only rows that match from the data frames, specify `all=FALSE`.|**An inner join**<BR>`DT1<-data.table(x=c('a','b','dt1'),y=1:3)`<BR>`DT2 <- data.table(x=c('b', 'dt2'), z=4:5)`<BR>`setkey(DT1, x)`<BR>`setkey(DT2, x)`<BR>`merge(DT1, DT2, all=FALSE)`<BR><BR>**Subset joins**(faster) **x[y, nomatch=0]**|`library(plyr)`<BR>`join(x, y, by = NULL, type = "inner")`<BR>`join_all(a_list, by = NULL, type = "inner")`<BR><BR>`library(dplyr)`<BR>`inner_join(x, y)`
