@@ -9,7 +9,7 @@ Version 1.0
 5. [Attributes](#attributes)
 6. [Entering Input & Evaluation & Printing & Creating Vectors](#entering input--evaluation--printing--creating-vectors)
 7. [Factors](#factors)
-8. [Vector vs Lists vs Matrices vs Table vs Data Frames](#vector-vs lists-vs-matrices-vs-table-vs-data-frames)
+8. [Vector vs Lists vs Matrices vs Table vs Data Frames](#vector-vs-lists-vs-matrices-vs-table-vs-data-frames)
 9. [Missing Values & Removing NA](#missing-values--removing-na)
 	- [Missing values](#missing-values)
 	- [Removing NA Values](#removing-na-values)
@@ -35,6 +35,7 @@ Version 1.0
 	- [Generating Random Numbers From a Linear Model](#generating-random-numbers-from-a-linear-model)
 	- [Generating Random Numbers From a Generalized Linear Model](#generating-random-numbers-from-a-generalized-linear-model)
 	- [Random Sampling](#random-sampling)
+
 ----------
 ## Workspace and Files
 Command|Explain
