@@ -1,14 +1,14 @@
 # Course of Getting and Cleaning Data Notes
 Version 1.0
 
-1. [The Tidy Data](#The-Tidy-Data)
-2. [The Code Book](#The-Code-Book)
-3. [Downloading Files](#Downloading-Files)
-4. [Sorting and ordering and Creating categorical variables](#Sorting-and-ordering-and-Creating-categorical-variables)
-5. [Summarizing Data](#Summarizing-Data)
-6. [Reshaping Data](#Reshaping-Data)
-7. [Reading Files](#Reading-Files)
-8. [data.table vs. dplyr in simple](#data.table-vs.-dplyr-in-simple)
+1. [The Tidy Data](#the-tidy-data)
+2. [The Code Book](#the-code-book)
+3. [Downloading Files](#downloading-files)
+4. [Sorting and ordering and Creating categorical variables](#sorting-and-ordering-and-creating-categorical-variables)
+5. [Summarizing Data](#summarizing-data)
+6. [Reshaping Data](#reshaping-data)
+7. [Reading Files](#reading-files)
+8. [data.table vs. dplyr in simple](#datatable-vs-dplyr-in-simple)
 
 ----------
 ## The Tidy Data 
