@@ -11,8 +11,8 @@ Version 1.0
 8. [Reading Files](#reading-files)
 9. [data.table vs dplyr in simple](#datatable-vs-dplyr-in-simple)
 10. [Merging Data](#merging-data)
-11. [Overview of joins](#overview-of-joins)
-12. [Merge in basic data.table and plyr](#merge-in-basic-data-table-and-plyr)
+	- [Overview of joins](#overview-of-joins)
+	- [Merge in basic data.table and plyr](#merge-in-basic-data-table-and-plyr)
 
 ----------
 ## The Tidy Data 
