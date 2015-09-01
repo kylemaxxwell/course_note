@@ -111,6 +111,10 @@ no yes
 [1] 2 2 1 2 1
 attr(,"levels")
 [1] "no"  "yes"
+> levels(x)<-c("yes","no")
+> x
+[1] no  no  yes no  yes
+Levels: yes no
 ```
 
 The order of the levels can be set using the `levels` argument to `factor()`. This can be important in linear modelling because the first level is used as the baseline level.  
@@ -120,6 +124,21 @@ The order of the levels can be set using the `levels` argument to `factor()`. Th
 > x
 [1] yes yes no yes no 
 Levels: yes no
+
+# SAME TO
+relevel(x,ref="yes")
+```
+Note that the levels are alphabetically ordered by default. We can also specify the levels within the factor call
+```r
+> factor(c("case", "case", "case", "control", "control", "control"), labels = c("control", "case"), ordered = TRUE)
+[1] control control control case case case
+Levels: control < case
+
+# converted to numeric or character very easily
+> as.character(x)
+[1] "control" "control" "control" "case" "case" "case"
+> as.numeric(x)
+[1] 1 1 1 2 2 2
 ```
 
 ## Vector *vs* Lists *vs* Matrices *vs* Table *vs* Data Frames

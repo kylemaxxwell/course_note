@@ -1,6 +1,15 @@
 # Course of Getting and Cleaning Data Notes
 Version 1.0
 
+1. [The Tidy Data](#The Tidy Data)
+2. [The Code Book](#The Code Book)
+3. [Downloading Files](#Downloading Files)
+4. [Sorting and ordering and Creating categorical variables](#Sorting and ordering and Creating categorical variables)
+5. [Summarizing Data](#Summarizing Data)
+6. [Reshaping Data](#Reshaping Data)
+7. [Reading Files](#Reading Files)
+8. [data.table vs. dplyr in simple](#data.table vs. dplyr in simple)
+
 ----------
 ## The Tidy Data 
 1. Each variable forms a column.
@@ -42,6 +51,55 @@ Version 1.0
 	library(RCurl)
 	```
 
+## Sorting and ordering and Creating categorical variables
+**`sort(x, decreasing=FALSE)`**: returns an **object** that has been sorted/ordered.
+```r
+> head(sort(dat2$daily, decreasing = TRUE)) 
+```
+**`order(...,decreasing=FALSE)`**: returns the **indices** corresponding to the sorted data.
+```r
+> datSorted = dat2[order(dat2$daily, decreasing = TRUE), ]
+
+# Fix the row names not refer to their previous values
+> rownames(datSorted) = NULL
+```
+**`ifelse(test, yes, no)`**: returns a value with the same shape as test which is filled with elements selected from either yes or no
+depending on whether the element of test is TRUE or FALSE.
+```r
+> hi_rider = ifelse(dat$daily > 10000, 1, 0)
+> table(hi_rider)
+> riderLevels = ifelse(dat$daily < 10000, "low", ifelse(dat$daily > 20000, "high", "med"))
+```
+**`cut()`**: divides the range of x into intervals and codes the values in x according to which interval they fall.
+```r
+> x = 1:100
+> cx = cut(x, breaks = c(0, 10, 25, 50, 100))
+> head(cx)
+[1] (0,10] (0,10] (0,10] (0,10] (0,10] (0,10]
+Levels: (0,10] (10,25] (25,50] (50,100]
+> table(cx)
+cx
+  (0,10] (10,25] (25,50] (50,100]
+      10      15      25       50
+
+# leave off the labels
+# Note that you have to specify the endpoints(100) of the data, otherwise some of the categories will not be created
+> cx = cut(x, breaks = c(0, 10, 25, 50, 100), labels = FALSE)
+> head(cx)
+[1] 1 1 1 1 1 1
+> table(cx)
+cx
+  1  2  3  4
+ 10 15 25 50
+```
+**`cut2()`**: Easier cutting
+```r
+library(Hmisc)
+# SAME TO restData$zipGroups = cut(restData$zipCode,breaks=quantile(restData$zipCode))
+restData$zipGroups = cut2(restData$zipCode,g=4)
+table(restData$zipGroups)
+```
+
 ## Summarizing Data
 ### 03_02_summarizingData
 TITLE|SCRIPT
@@ -58,6 +116,8 @@ TITLE|SCRIPT
 10. Cross tabs|`data(UCBAdmissions)`<BR>`DF = as.data.frame(UCBAdmissions)`<BR>`xt <- xtabs(Freq ~ Gender + Admit,data=DF)`
 11. Flat tables|`warpbreaks$replicate <- rep(1:9, len = 54)`<BR>`xt = xtabs(breaks ~.,data=warpbreaks)`<BR>`ftable(xt)`
 12. Size of a data set|`print(object.size(fakeData),units="Mb")`
+13. Basic statistical summarization|`mean(x)`: takes the mean of x<BR>`sd(x)`: takes the standard deviation of x<BR>`median(x)`: takes the median of x<BR>`quantile(x)`: displays sample quantities of x. Default is min, IQR, max<BR>`range(x)`: displays the range. Same as `c(min(x), max(x))`<BR>`rowMeans(x)`: takes the means of each row of x<BR>`colMeans(x)`: takes the means of each column of x<BR>`rowSums(x)`: takes the sum of each row of x<BR>`colSums(x)`: takes the sum of each column of x<BR>`summary(x)`: for data frames, displays the quantile information
+14. Basic summarization plots|`plot(x,y)`: scatterplot of x and y<BR>`boxplot(y~x)`: boxplot of y against levels of x<BR>`hist(x)`: histogram of x<BR>`density(X)`: kernel density plot of x<BR>`matplot(x,y)`: scatterplot of two matrices, x and y<BR>`pairs(x,y)`: plots pairwise scatter plots of matrices x and y, column by column
 
 ## Reshaping Data
 ### 03_04_reshapingData
