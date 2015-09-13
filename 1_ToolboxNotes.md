@@ -202,3 +202,17 @@ remove(list=ls()[!(ls() %in% c("NEI","SCC"))]) ## remove all objects without NEI
 * If you aren't sure, enter ```find.package("devtools")``` in the console
 * To install devtools, use ```install.packages("devtools")```
 * About Rtools see more in 02_10_rtools.pdf
+
+## Encoding
+- Print version information about R, the OS and attached or loaded packages.
+```r
+sessionInfo()
+```
+- Query or Set Aspects of the Locale
+```r
+# locale will pick up the default locale for the system.
+Sys.setlocale(category = "LC_CTYPE", locale = "usa")
+Sys.setlocale(category = "LC_CTYPE", locale = "english")
+Sys.setlocale(category = "LC_CTYPE", locale = "chinese")
+Sys.setlocale(category = "LC_CTYPE", locale = "Russian")
+```
